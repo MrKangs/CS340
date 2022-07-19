@@ -1,19 +1,29 @@
+/*
+Authors:        Mark Jordan
+Course:         CS340 - Intro to Databases
+Instructors:    Dr. Michael. Curry, Danielle Safonte
+Project:        Step 3 Draft
+Due:            2022-07-18
+Description:    Data Definition queries for DOGE-X.
+*/
+
+
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE fiatWallets (
-  fiatWalletID varchar(50) NOT NULL UNIQUE PRIMARY KEY, /* It will have a prefix of 'F' followed by an int combination */
+  fiatWalletID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'F' followed by an int combination */
   fiatBalance decimal(15,2) NOT NULL
 );
 
 CREATE OR REPLACE TABLE dogecoinWallets (
-  dogecoinWalletID varchar(50) NOT NULL UNIQUE PRIMARY KEY, /* It will have a prefix of 'D' followed by an int combination */
+  dogecoinWalletID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'D' followed by an int combination */
   walletAddress varchar(100) NOT NULL UNIQUE,
   dogecoinBalance decimal(18,9) NOT NULL
 );
 
 CREATE OR REPLACE TABLE userAccounts (
-  userID varchar(50) NOT NULL UNIQUE PRIMARY KEY, /* It will have a prefix of 'U' followed by an int combination */
+  userID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'U' followed by an int combination */
   firstName varchar(100) NOT NULL,
   lastName varchar(100) NOT NULL,
   address varchar(500) NOT NULL,
@@ -29,10 +39,10 @@ CREATE OR REPLACE TABLE userAccounts (
   CONSTRAINT FK_userAccounts_with_dogecoinWalletID FOREIGN KEY (dogecoinWalletID) REFERENCES dogecoinWallets(dogecoinWalletID) ON DELETE CASCADE
 );
 
-CREATE OR REPLACE TABLE exchangeOrders (
-  exchangeID varchar(50) NOT NULL UNIQUE PRIMARY KEY, /* It will have a prefix of 'E' followed by an int combination */
-  fiatWalletID varchar(50) NOT NULL,
-  dogecoinWalletID varchar(50) NOT NULL,
+CREATE OR REPLACE TABLE exchangeOrders(
+  exchangeID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'E' followed by an int combination */
+  fiatWalletID varchar(50) NOT NULL DEFAULT "Removed",
+  dogecoinWalletID varchar(50) NOT NULL DEFAULT "Removed",
   orderTimestamp TIMESTAMP NOT NULL,
   orderType varchar(50) NOT NULL,
   orderDirection varchar(50) NOT NULL,
@@ -50,7 +60,7 @@ CREATE OR REPLACE TABLE dogecoinTransactions (
   dogecoinWalletID varchar(50) NOT NULL, /* It will have a prefix of 'D' followed by an int combination */
   externalWalletAddress varchar(100) NOT NULL,
   txHash varchar(100) NOT NULL UNIQUE,
-  CONSTRAINT FX_dogecoinTransactions_with_dogecoinWalletID FOREIGN KEY (dogecoinWalletID) REFERENCES dogecoinWallets(dogecoinWalletID)
+  CONSTRAINT FX_dogecoinTransactions_with_dogecoinWalletID FOREIGN KEY (dogecoinWalletID) REFERENCES dogecoinWallets(dogecoinWalletID) ON DELETE CASCADE
 );
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
