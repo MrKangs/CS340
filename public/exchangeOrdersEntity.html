@@ -1,0 +1,96 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+<head>
+    <title>DOGE-X</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="Entity.js" charset="utf-8" defer></script>
+</head>
+<header>
+    <div class="header">
+        <div class="home-button">
+            <h1><a href=index.html>DOGE-X</a></h1>
+        </div>
+        <div class="navbar">
+            <a href="userAccountsEntity.html">User Accounts</a>
+            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
+            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
+        </div>
+    </div>
+</header>
+<body>
+    <h2>Exchange Orders</h2>
+    <div class="button-bar">
+        <div class="button">
+            <button type="button" class="create-button"
+            onclick="location.href='userAccountsForm.html'">Create/Update</button>
+        </div>
+        <div class="button">
+            <button type="button" class="delete-button">Delete</button>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>            
+                <tr>
+                    <th>Select</th>
+                    <th>Exchange ID</th>
+                    <th>Fiat Wallet ID</th>
+                    <th>Dogecoin Wallet ID</th>
+                    <th>Order Timestamp</th>
+                    <th>Order Type</th>
+                    <th>Order Direction</th>
+                    <th>Amount Filled</th>
+                    <th>Order Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" name="select" value="1"></td>
+                    <td>E1</td>
+                    <td>F19032485</td>
+                    <td>D12345789</td>
+                    <td>2022-06-23 13:10:11</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>1523.129447890</td>
+                    <td>198.01</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" value="2"></td>
+                    <td>E2</td>
+                    <td>F12348904</td>
+                    <td>D42005384</td>
+                    <td>2022-06-23 15:10:15</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>5553.242000320</td>
+                    <td>721.92</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" value="3"></td>
+                    <td>E3</td>
+                    <td>F19032485</td>
+                    <td>D88832435</td>
+                    <td>2022-06-24 04:10:10</th>
+                    <td>Limit</td>
+                    <td>Sell</td>
+                    <td>32342.342477430</td>
+                    <td>4204.50</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<footer>
+    <div class="footer">
+        <p>
+            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+</html>
