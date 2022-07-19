@@ -9,7 +9,9 @@
 </head>
 <header>
     <div class="header">
-        <h1><a href=index.html>DOGE-X</a></h1>
+        <div class="home-button">
+            <h1><a href=index.html>DOGE-X</a></h1>
+        </div>
         <div class="navbar">
             <a href="userAccountsEntity.html">User Accounts</a>
             <a href="fiatWalletsEntity.html">Fiat Wallets</a>
@@ -20,41 +22,83 @@
     </div>
 </header>
 <body>
-        <h2>
-            User Accounts
-        </h2>
-    <div class="table">
-    <button type="button" class="create-button" onclick="location.href='userAccountsForm.html'">Create/Update</button>
-    <button type="button" class="delete-button">Delete</button>
+    <h2>User Accounts</h2>
+    <div class="button-bar">
+        <div class="button">
+            <button type="button" class="create-button"
+            onclick="location.href='userAccountsForm.html'">Create/Update</button>
+        </div>
+        <div class="button">
+            <button type="button" class="delete-button">Delete</button>
+        </div>
+    </div>
     <div class="table">
         <table>
             <thead>            
                 <tr>
                     <th>Select</th>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Password</th>
                     <th>Fiat Wallet ID</th>
-                    <th>Fiat Balance</th>
+                    <th>Dogecoin Wallet ID</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><input type="checkbox" name="select" value="1"></td>
-                    <td>1</td>
-                    <td>$100</td>
+                    <td>U1</td>
+                    <td>Kenneth</td>
+                    <td>Kang</td>
+                    <td>123 SW 201 St</td>
+                    <td>Portland</td>
+                    <td>OR</td>
+                    <td>97005</td>
+                    <td>8398741723</td>
+                    <td>kkang@gmail.com</td>
+                    <td>12345a</td>
+                    <td>F12348904</td>
+                    <td>D12345789</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" name="select" value="2"></td>
-                    <td>2</td>
-                    <td>$200</td>
+                    <td>U2</td>
+                    <td>Mark</td>
+                    <td>Jordan</td>
+                    <td>1800 Lacassie Ave</td>
+                    <td>Walnut Creek</td>
+                    <td>CA</td>
+                    <td>94596</td>
+                    <td>4151234567</td>
+                    <td>jjord@hotmail.com</td>
+                    <td>6789uu</td>
+                    <td>F19032485</td>
+                    <td>D98247833</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" name="select" value="3"></td>
-                    <td>3</td>
-                    <td>$300</td>
+                    <td>U3</td>
+                    <td>Soo</td>
+                    <td>Kim</td>
+                    <td>14 41nd St</th>
+                    <td>New York</td>
+                    <td>NY</td>
+                    <td>10018</td>
+                    <td>2125459457</td>
+                    <td>skim@outlook.com</td>
+                    <td>89o4aa0</td>
+                    <td>F39002134</td>
+                    <td>D42005384</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-
     </div>
 </body>
 <footer>

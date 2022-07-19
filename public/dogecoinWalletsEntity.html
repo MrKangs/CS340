@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="Entity.js" charset="utf-8" defer></script>
 </head>
-<body>
+<header>
     <div class="header">
-        <h1><a href=index.html>DOGE-X</a></h1>
-        <h2>
-            Dogecoin Wallets
-        </h2>
+        <div class="home-button">
+            <h1><a href=index.html>DOGE-X</a></h1>
+        </div>
         <div class="navbar">
             <a href="userAccountsEntity.html">User Accounts</a>
             <a href="fiatWalletsEntity.html">Fiat Wallets</a>
@@ -20,6 +20,51 @@
             <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
             <a href="exchangeOrdersEntity.html">Exchange Orders</a>
         </div>
+    </div>
+</header>
+<body>
+    <h2>Dogecoin Wallets</h2>
+    <div class="button-bar">
+        <div class="button">
+            <button type="button" class="create-button"
+            onclick="createUpdate()">Create/Update</button>
+        </div>
+        <div class="button">
+            <button type="button" class="delete-button"
+            onclick="deleteConfirmation()">Delete</button>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>            
+                <tr>
+                    <th>Select</th>
+                    <th>Dogecoin Wallet ID</th>
+                    <th>Dogecoin Wallet Address</th>
+                    <th>Dogecoin Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td>D12345789</td>
+                    <td>D8XskzpskY1fGxBrfWMu65AWF1LSFeAvkF</td>
+                    <td>1514.000000000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td>D98247833</td>
+                    <td>DGJNetovmNoBZiF5YymLfcc4R8LAQeewkz</td>
+                    <td>25789.000000000</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td>D42005384</td>
+                    <td>D9wfpqQU4PCZRmDpAqvH6hmau7dEBBJFTq</td>
+                    <td>4444.000000000</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 <footer>
