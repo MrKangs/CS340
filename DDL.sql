@@ -41,15 +41,15 @@ CREATE OR REPLACE TABLE userAccounts (
 
 CREATE OR REPLACE TABLE exchangeOrders(
   exchangeID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'E' followed by an int combination */
-  fiatWalletID varchar(50) NOT NULL DEFAULT "Removed",
-  dogecoinWalletID varchar(50) NOT NULL DEFAULT "Removed",
+  fiatWalletID varchar(50),
+  dogecoinWalletID varchar(50),
   orderTimestamp TIMESTAMP NOT NULL,
   orderType varchar(50) NOT NULL,
   orderDirection varchar(50) NOT NULL,
   amountFilled decimal(18,9) NOT NULL,
   orderPrice decimal(15,2) NOT NULL,
-  CONSTRAINT FK_exchangeOrders_with_fiatWalletID FOREIGN KEY (fiatWalletID) REFERENCES fiatWallets(fiatWalletID) ON DELETE SET DEFAULT,
-  CONSTRAINT FK_exchangeOrders_with_dogecoinWalletID FOREIGN KEY (dogecoinWalletID) REFERENCES dogecoinWallets(dogecoinWalletID) ON DELETE SET DEFAULT
+  CONSTRAINT FK_exchangeOrders_with_fiatWalletID FOREIGN KEY (fiatWalletID) REFERENCES fiatWallets(fiatWalletID) ON DELETE SET NULL,
+  CONSTRAINT FK_exchangeOrders_with_dogecoinWalletID FOREIGN KEY (dogecoinWalletID) REFERENCES dogecoinWallets(dogecoinWalletID) ON DELETE SET NULL
 );
 
 CREATE OR REPLACE TABLE dogecoinTransactions (

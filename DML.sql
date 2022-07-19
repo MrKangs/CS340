@@ -61,18 +61,22 @@ UPDATE dogecoinTransactions SET amount = 8683986.38387583 WHERE txID = 'T11';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-DELETE FROM fiatWallets WHERE fiatWalletID = (SELECT fiatWallets.fiatWalletID FROM fiatWallets INNER JOIN userAccounts ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE userAccounts.userID = 'U2');
-DELETE FROM dogecoinWallets WHERE dogecoinWalletID = (SELECT dogecoinWallets.dogecoinWalletID FROM dogecoinWallets INNER JOIN userAccounts ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE userAccounts.userID = 'U2'); 
+SET @fiatWalletID := (SELECT fiatWallets.fiatWalletID FROM fiatWallets INNER JOIN userAccounts ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE userAccounts.userID = 'U2');
+SET @dogecoinWalletID := (SELECT dogecoinWallets.dogecoinWalletID FROM dogecoinWallets INNER JOIN userAccounts ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE userAccounts.userID = 'U2');
+DELETE FROM dogecoinWallets WHERE dogecoinWalletID = @dogecoinWalletID;
+DELETE FROM fiatWallets WHERE fiatWalletID = @fiatWalletID;
 DELETE FROM userAccounts WHERE userID = 'U2';
--- userID is the primary key will always be used for where clause.
--- When you are delete a record from userAccounts, the associated fiatWallets and dogecoinWallets will be removed as well.
+-- -- userID is the primary key will always be used for where clause.
+-- -- When you are delete a record from userAccounts, the associated fiatWallets and dogecoinWallets will be removed as well.
 
-DELETE FROM dogecoinWallets WHERE dogecoinWalletID = (SELECT dogecoinWallet.dogecoinWalletID FROM dogecoinWallets INNER JOIN userAccounts ON userAccounts.dogecoinWalletID = dogecoinWallets.dogecoinWalletID INNER JOIN fiatWallets ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE fiatWallets.fiatWalletID = 'F34072432');
+SET @dogecoinWalletID := (SELECT dogecoinWallets.dogecoinWalletID FROM dogecoinWallets INNER JOIN userAccounts ON userAccounts.dogecoinWalletID = dogecoinWallets.dogecoinWalletID INNER JOIN fiatWallets ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE fiatWallets.fiatWalletID = 'F34072432');
+DELETE FROM dogecoinWallets WHERE dogecoinWalletID = @dogecoinWalletID;
 DELETE FROM fiatWallets WHERE fiatWalletID = 'F34072432';
 -- fiatWalletID is the primary key will always be used for where clause.
 -- When fiatWalletID is deleted, then the dogecoinWallet gets delete as well.
 
-DELETE FROM fiatWallets WHERE fiatWalletID = (SELECT fiatWallets.fiatWalletID FROM fiatWallets INNER JOIN userAccounts ON userAccounts.dogecoinWalletID = dogecoinWallets.dogecoinWalletID INNER JOIN fiatWallets ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE dogecoinWallets.dogecoinWalletID = 'D88832435');
+SET @fiatWalletID := (SELECT fiatWallets.fiatWalletID FROM fiatWallets INNER JOIN userAccounts ON userAccounts.fiatWalletID = fiatWallets.fiatWalletID INNER JOIN dogecoinWallets ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE dogecoinWallets.dogecoinWalletID = 'D88832435');
+DELETE FROM fiatWallets WHERE fiatWalletID = @fiatWalletID;
 DELETE FROM dogecoinWallets WHERE dogecoinWalletID = 'D88832435';
 -- dogecoinWalletID is the primary key will always be used for where clause.
 -- When dogecoinWalletID is deleted, then the fiatWallet gets delete as well.
