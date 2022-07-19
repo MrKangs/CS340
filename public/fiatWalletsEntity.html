@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="Entity.js" charset="utf-8" defer></script>
 </head>
 <header>
     <div class="header">
@@ -21,8 +22,8 @@
 </header>
 <body>
     <h2>Fiat Wallets</h2>
-    <button type="button" class="create-button" onclick="location.href='fiatWalletsForm.html'">Create/Update</button>
-    <button type="button" class="delete-button">Delete</button>
+    <button type="button" class="create-button" onclick="createUpdate()">Create/Update</button>
+    <button type="button" class="delete-button" onclick="deleteConfirmation()">Delete</button>
     <div class="table">
         <table>
             <thead>            
@@ -34,17 +35,17 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" name="select" value="1"></td>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
                     <td>1</td>
                     <td>$100</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="select" value="2"></td>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
                     <td>2</td>
                     <td>$200</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="select" value="3"></td>
+                    <td><input type="checkbox" name="select" id="row_selection"></td>
                     <td>3</td>
                     <td>$300</td>
                 </tr>
