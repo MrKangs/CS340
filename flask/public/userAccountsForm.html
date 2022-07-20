@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+<head>
+    <title>DOGE-X</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script src="Form.js" charset="utf-8" defer></script> -->
+</head>
+<header>
+    <div class="header">
+        <h1><a href=index.html>DOGE-X</a></h1>
+        <div class="navbar">
+            <a href="userAccountsEntity.html">User Accounts</a>
+            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
+            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
+        </div>
+    </div>
+</header>
+<body>
+    <h2>User Accounts Form</h2>
+    <form method="post" action="userAccountsEntity.html">
+        
+        <label for="userID">User ID:</label>
+        <input type="text" id="userID" name="userID" placeholder="User ID">
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="First Name">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Address">
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="City">
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" placeholder="State">
+
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code">
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Email">
+
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" placeholder="Password">
+
+        <label for="fiatWalletID">Fiat Wallet ID:</label>
+        <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID">
+
+        <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
+        <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+
+        <input type="submit" value="Save & Close" onclick="uploadRecord()">
+</body>
+<footer>
+    <div class="footer">
+        <p>
+            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+</html>

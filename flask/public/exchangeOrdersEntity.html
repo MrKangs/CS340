@@ -23,15 +23,14 @@
     </div>
 </header>
 <body>
-    <h2>Dogecoin Wallets</h2>
+    <h2>Exchange Orders</h2>
     <div class="button-bar">
         <div class="button">
             <button type="button" class="create-button"
-            onclick="createUpdate()">Create/Update</button>
+            onclick="location.href='exchangeOrdersForm.html'">Create/Update</button>
         </div>
         <div class="button">
-            <button type="button" class="delete-button"
-            onclick="deleteConfirmation()">Delete</button>
+            <button type="button" class="delete-button">Delete</button>
         </div>
     </div>
     <div class="table">
@@ -39,29 +38,49 @@
             <thead>            
                 <tr>
                     <th>Select</th>
+                    <th>Exchange ID</th>
+                    <th>Fiat Wallet ID</th>
                     <th>Dogecoin Wallet ID</th>
-                    <th>Dogecoin Wallet Address</th>
-                    <th>Dogecoin Balance</th>
+                    <th>Order Timestamp</th>
+                    <th>Order Type</th>
+                    <th>Order Direction</th>
+                    <th>Amount Filled</th>
+                    <th>Order Price</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td><input type="checkbox" name="select" value="1"></td>
+                    <td>E1</td>
+                    <td>F19032485</td>
                     <td>D12345789</td>
-                    <td>D8XskzpskY1fGxBrfWMu65AWF1LSFeAvkF</td>
-                    <td>1514.000000000</td>
+                    <td>2022-06-23 13:10:11</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>1523.129447890</td>
+                    <td>198.01</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>D98247833</td>
-                    <td>DGJNetovmNoBZiF5YymLfcc4R8LAQeewkz</td>
-                    <td>25789.000000000</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td><input type="checkbox" name="select" value="2"></td>
+                    <td>E2</td>
+                    <td>F12348904</td>
                     <td>D42005384</td>
-                    <td>D9wfpqQU4PCZRmDpAqvH6hmau7dEBBJFTq</td>
-                    <td>4444.000000000</td>
+                    <td>2022-06-23 15:10:15</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>5553.242000320</td>
+                    <td>721.92</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="select" value="3"></td>
+                    <td>E3</td>
+                    <td>F19032485</td>
+                    <td>D88832435</td>
+                    <td>2022-06-24 04:10:10</th>
+                    <td>Limit</td>
+                    <td>Sell</td>
+                    <td>32342.342477430</td>
+                    <td>4204.50</td>
                 </tr>
             </tbody>
         </table>
