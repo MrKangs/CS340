@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="Entity.js" charset="utf-8" defer></script>
+    
 </head>
 <header>
     <div class="header">
@@ -23,11 +24,11 @@
     </div>
 </header>
 <body>
-    <h2>Dogecoin Transactions</h2>
+    <h2>Exchange Orders</h2>
     <div class="button-bar">
         <div class="button">
             <button type="button" class="create-button"
-            onclick="location.href='userAccountsForm.html'">Create/Update</button>
+            onclick="location.href='exchangeOrdersForm.html'">Create/Update</button>
         </div>
         <div class="button">
             <button type="button" class="delete-button">Delete</button>
@@ -38,45 +39,49 @@
             <thead>            
                 <tr>
                     <th>Select</th>
-                    <th>Transaction ID</th>
-                    <th>Transaction Timestamp</th>
-                    <th>Dogecoin Amount</th>
-                    <th>Transaction Direction</th>
+                    <th>Exchange ID</th>
+                    <th>Fiat Wallet ID</th>
                     <th>Dogecoin Wallet ID</th>
-                    <th>External Wallet ID</th>
-                    <th>Transaction Hash</th>
+                    <th>Order Timestamp</th>
+                    <th>Order Type</th>
+                    <th>Order Direction</th>
+                    <th>Amount Filled</th>
+                    <th>Order Price</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><input type="checkbox" name="select" value="1"></td>
-                    <td>T1</td>
-                    <td>2022-06-27 13:10:11</td>
-                    <td>6200.056347843</td>
-                    <td>Deposit</td>
+                    <td>E1</td>
+                    <td>F19032485</td>
                     <td>D12345789</td>
-                    <td>DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy</td>
-                    <td>92b1588447ab7f6857ae63185e2046a5a4aa3db0e79c8988f44a90219119245b</td>
+                    <td>2022-06-23 13:10:11</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>1523.129447890</td>
+                    <td>198.01</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" name="select" value="2"></td>
-                    <td>T2</td>
-                    <td>2022-06-28 15:10:15</td>
-                    <td>145.023459043</td>
-                    <td>Deposit</td>
+                    <td>E2</td>
+                    <td>F12348904</td>
                     <td>D42005384</td>
-                    <td>DAu9awAQWtbD3KR1bNKjNvtR7NhMvyGc4z</td>
-                    <td>7707ddd1931c7ecd937f7edd717c8c7d1cf78947d880384a5a21576ba5f155d5</td>
+                    <td>2022-06-23 15:10:15</td>
+                    <td>Market</td>
+                    <td>Buy</td>
+                    <td>5553.242000320</td>
+                    <td>721.92</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" name="select" value="3"></td>
-                    <td>T3</td>
-                    <td>2022-06-28 04:10:10</td>
-                    <td>45000.189089043</td>
-                    <td>Deposit</th>
+                    <td>E3</td>
+                    <td>F19032485</td>
                     <td>D88832435</td>
-                    <td>DTJFYN36jz1qx4wLiqQ5Atj3YuxPty8HyD</td>
-                    <td>802ccc8407e45018c639b978210b1c7bba874ae701501cffb40b8af4171145f7</td>
+                    <td>2022-06-24 04:10:10</th>
+                    <td>Limit</td>
+                    <td>Sell</td>
+                    <td>32342.342477430</td>
+                    <td>4204.50</td>
                 </tr>
             </tbody>
         </table>
