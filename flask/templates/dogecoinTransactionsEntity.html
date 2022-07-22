@@ -60,36 +60,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% for transaction in transactions %}
                 <tr>
                     <td><input type="checkbox" name="select" value="1"></td>
-                    <td>T1</td>
-                    <td>2022-06-27 13:10:11</td>
-                    <td>6200.056347843</td>
-                    <td>Deposit</td>
-                    <td>D12345789</td>
-                    <td>DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy</td>
-                    <td>92b1588447ab7f6857ae63185e2046a5a4aa3db0e79c8988f44a90219119245b</td>
+                    {% for key in transaction %}
+                    <td>{{transaction[key]}}</td>
+                    {% endfor %}
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" value="2"></td>
-                    <td>T2</td>
-                    <td>2022-06-28 15:10:15</td>
-                    <td>145.023459043</td>
-                    <td>Deposit</td>
-                    <td>D42005384</td>
-                    <td>DAu9awAQWtbD3KR1bNKjNvtR7NhMvyGc4z</td>
-                    <td>7707ddd1931c7ecd937f7edd717c8c7d1cf78947d880384a5a21576ba5f155d5</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" value="3"></td>
-                    <td>T3</td>
-                    <td>2022-06-28 04:10:10</td>
-                    <td>45000.189089043</td>
-                    <td>Deposit</th>
-                    <td>D88832435</td>
-                    <td>DTJFYN36jz1qx4wLiqQ5Atj3YuxPty8HyD</td>
-                    <td>802ccc8407e45018c639b978210b1c7bba874ae701501cffb40b8af4171145f7</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

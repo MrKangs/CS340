@@ -44,21 +44,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% for fiatwallet in fiatwallets %}
                 <tr>
                     <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F12348904</td>
-                    <td>55.00</td>
+                    {% for key in fiatwallet.keys() %}
+                    <td>{{fiatwallet[key]}}</td>
+                    {% endfor %}
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F19032485</td>
-                    <td>15789.00</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F39002134</td>
-                    <td>34578.00</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

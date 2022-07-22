@@ -62,39 +62,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% for order in exchangeOrders %}
                 <tr>
                     <td><input type="checkbox" name="select" value="1"></td>
-                    <td>E1</td>
-                    <td>F19032485</td>
-                    <td>D12345789</td>
-                    <td>2022-06-23 13:10:11</td>
-                    <td>Market</td>
-                    <td>Buy</td>
-                    <td>1523.129447890</td>
-                    <td>198.01</td>
+                    {% for key in order.keys() %}
+                    <td>{{order[key]}}</td>
+                    {% endfor %}
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" value="2"></td>
-                    <td>E2</td>
-                    <td>F12348904</td>
-                    <td>D42005384</td>
-                    <td>2022-06-23 15:10:15</td>
-                    <td>Market</td>
-                    <td>Buy</td>
-                    <td>5553.242000320</td>
-                    <td>721.92</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" value="3"></td>
-                    <td>E3</td>
-                    <td>F19032485</td>
-                    <td>D88832435</td>
-                    <td>2022-06-24 04:10:10</th>
-                    <td>Limit</td>
-                    <td>Sell</td>
-                    <td>32342.342477430</td>
-                    <td>4204.50</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
