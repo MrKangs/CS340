@@ -10,7 +10,7 @@
 </head>
 <header>
     <div class="header">
-        <h1><a href=index.html>DOGE-X</a></h1>
+        <h1><a href="../index.html">DOGE-X</a></h1>
         <div class="navbar">
             <a href="userAccountsEntity.html">User Accounts</a>
             <a href="fiatWalletsEntity.html">Fiat Wallets</a>
@@ -21,19 +21,19 @@
     </div>
 </header>
 <body>
-    <h2>Dogecoin Wallet Form</h2>
-    <form method="post" action="dogecoinWalletsEntity.html">
-        
-        <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
-        <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+    <h2>Fiat Wallet Form</h2>
+    <form method="post" action="fiatWalletsEntity.html">
+        <label for="fiatWalletId">Fiat Wallet ID:</label>
+        <input type="text" id="fiatWalletId" name="fiatWalletId" placeholder="Fiat Wallet ID">
 
-        <label for="walletAddress">Wallet Address:</label>
-        <input type="text" id="walletAddress" name="walletAddress" placeholder="Wallet Address">
+        <label for="fiatWalletName">Fiat Wallet Name:</label>
+        <input type="text" id="fiatWalletName" name="fiatWalletName" placeholder="Fiat Wallet Name">
 
-        <label for="dogecoinBalance">Dogecoin Balance:</label>
-        <input type="text" id="dogecoinBalance" name="dogecoinBalance" placeholder="Dogecoin Balance">
+        <label for="fiatWalletBalance">Fiat Wallet Balance:</label>
+        <input type="text" id="fiatWalletBalance" name="fiatWalletBalance" placeholder="Fiat Wallet Balance">
 
         <input type="submit" value="Save & Close" onclick="uploadRecord()">
+    </form>
 </body>
 <footer>
     <div class="footer">

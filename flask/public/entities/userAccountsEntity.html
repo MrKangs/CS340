@@ -5,46 +5,59 @@
     <title>DOGE-X</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
     <script src="Entity.js" charset="utf-8" defer></script>
 </head>
 <header>
-    <div class="header">
-        <div class="home-button">
-            <h1><a href=index.html>DOGE-X</a></h1>
-        </div>
-        <div class="navbar">
-            <a href="userAccountsEntity.html">User Accounts</a>
-            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
-            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
-            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
-            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
-        </div>
-    </div>
+    <!-- <div class="header"> -->
+        <navbar class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <h1><a href="../index.html">DOGE-X</a></h1>
+                </li>
+                <li class="nav-item">
+                    <a href="./userAccountsEntity.html">User Accounts</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./fiatWalletsEntity.html">Fiat Wallets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./exchangeOrdersEntity.html">Exchange Orders</a>
+                </li>
+            </ul>
+        </navbar>
+    <!-- </div> -->
 </header>
 <body>
     <h2>User Accounts</h2>
-    <div class="search-bar">
-        <div class="search-field" onkeypress="return didPressReturn(event)">
-            <input type="text" placeholder="User Name" name="search">
+    <div class="table-nav-bar">
+        <div class="search-bar">
+            <div class="search-field" onkeypress="return didPressReturn(event)">
+                <input type="text" placeholder="User Name" name="search">
+            </div>
+            <div class="search-button">
+                <button type="button" onclick="search()">Search</button>
+            </div>
         </div>
-        <div class="search-button">
-            <button type="button" onclick="search()">Search</button>
+        <div class="button-bar">
+            <div class="button">
+                <button type="button" class="create-button"
+                onclick="location.href='../forms/userAccountsForm.html'">Create</button>
+            </div>
+            <div class="button">
+                <button type="button" class="update-button"
+                onclick="location.href='../forms/userAccountsForm.html'">Update</button>
+            </div>
+            <div class="button">
+                <button type="button" class="delete-button">Delete</button>
+            </div>
         </div>
-    </div>
-    <div class="button-bar">
-        <div class="button">
-            <button type="button" class="create-button"
-            onclick="location.href='userAccountsForm.html'">Create</button>
-        </div>
-        <div class="button">
-            <button type="button" class="update-button"
-            onclick="location.href='userAccountsForm.html'">Update</button>
-        </div>
-        <div class="button">
-            <button type="button" class="delete-button">Delete</button>
-        </div>
-    </div>
     <div class="table">
         <table>
             <thead>            
@@ -100,7 +113,7 @@
                     <td>U3</td>
                     <td>Soo</td>
                     <td>Kim</td>
-                    <td>14 41nd St</th>
+                    <td>14 41nd St</td>
                     <td>New York</td>
                     <td>NY</td>
                     <td>10018</td>
@@ -117,7 +130,7 @@
 <footer>
     <div class="footer">
         <p>
-            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            &copy; Copyright 2022 | Group 50 - Mark Jordan and Kenneth Kang | All Rights Reserved.
         </p>
     </div>
 </footer>
