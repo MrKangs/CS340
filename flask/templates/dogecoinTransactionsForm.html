@@ -25,10 +25,10 @@
     <form method="post" action="dogecoinTransactionsEntity.html">
 
         <label for="txID">TX ID:</label>
-        <input type="text" id="txID" name="txID" placeholder="TX ID">
+        <input type="text" id="txID" name="txID" placeholder="TX ID" readonly>
 
         <label for="txTimestamp">TX Timestamp:</label>
-        <input type="text" id="txTimestamp" name="txTimestamp" placeholder="TX Timestamp">
+        <input type="datetime-local" id="txTimestamp" name="txTimestamp" placeholder="TX Timestamp" readonly>
 
         <label for="amount">Amount:</label>
         <input type="text" id="amount" name="amount" placeholder="Amount">
@@ -37,13 +37,13 @@
         <input type="text" id="txDirection" name="txDirection" placeholder="TX Direction">
 
         <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
-        <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+        <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID" readonly>
 
         <label for="externalWalletAddress">External Wallet Address:</label>
-        <input type="text" id="externalWalletAddress" name="externalWalletAddress" placeholder="External Wallet Address">
+        <input type="text" id="externalWalletAddress" name="externalWalletAddress" placeholder="External Wallet Address" readonly>
 
         <label for="txHash">TX Hash:</label>
-        <input type="text" id="txHash" name="txHash" placeholder="TX Hash">
+        <input type="text" id="txHash" name="txHash" placeholder="TX Hash" readonly>
         
         <input type="submit" value="Save & Close" onclick="uploadRecord()">
 </body>

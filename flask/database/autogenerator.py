@@ -2,27 +2,27 @@ import random
 import string
 
 def generate_pk_userAccounts(number:int):
-    pk_value = str("U" + number)
+    pk_value = str("U" + str(number))
     number += 1
     return pk_value, number
 
 def generate_pk_fiatWallets(number:int):
-    pk_value = str("F" + number)
+    pk_value = str("F" + str(number))
     number += 1
     return pk_value, number
 
 def generate_pk_dogecoinWallets(number:int):
-    pk_value = str("D" + number)
+    pk_value = str("D" + str(number))
     number += 1
     return pk_value, number
 
 def generate_pk_dogecoinTransactions(number:int):
-    pk_value = str("T" + number)
+    pk_value = str("T" + str(number))
     number += 1
     return pk_value, number
 
 def generate_pk_exchangeOrders(number:int):
-    pk_value = str("E" + number)
+    pk_value = str("E" + str(number))
     number += 1
     return pk_value, number
 

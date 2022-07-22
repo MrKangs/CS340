@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="Entity.js" charset="utf-8" defer></script>
 </head>
 <header>
     <div class="header">
@@ -23,6 +22,11 @@
     </div>
 </header>
 <body>
+
+    <script>
+        
+    </script>
+
     <h2>Dogecoin Wallets</h2>
     <div class="button-bar">
         <div class="button">
@@ -45,14 +49,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for dogecoinwallet in dogecoinwallets %}
+                {% for dogecoinwallet in dogecoinWallets %}
                 <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td><input type="checkbox" name="select" id="row_selection" value = 1></td>
                     {% for key in dogecoinwallet.keys() %}
                     <td>{{dogecoinwallet[key]}}</td>
-                    {% forend %}
+                    {% endfor %}
                 </tr>
-                {% forend %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
