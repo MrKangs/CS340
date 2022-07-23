@@ -59,7 +59,7 @@ def user():
             userID, pk_userAccounts = pk_generator.generate_pk_userAccounts(pk_userAccounts)
             fiatWalletID, pk_fiatWallets = pk_generator.generate_pk_fiatWallets(pk_fiatWallets)
             dogecoinWalletID, pk_dogecoinWallets = pk_generator.generate_pk_dogecoinWallets(pk_dogecoinWallets)
-            walletAddress, dogecoinWalletAddress = pk_generator.generate_transaction_hash(dogecoinWalletAddress)
+            walletAddress, dogecoinWalletAddress = pk_generator.generate_dogecoin_wallet_address(dogecoinWalletAddress)
 
             query1 = f'INSERT INTO fiatWallets (fiatWalletID, fiatBalance) VALUES ("{fiatWalletID}", {0})'
             query2 = f'INSERT INTO dogecoinWallets (dogecoinWalletID, walletAddress ,dogecoinBalance) VALUES ("{dogecoinWalletID}","{walletAddress}",{0})'
@@ -151,12 +151,10 @@ def exchangeorder():
             orderPrice = request.form["orderPrice"]
             fiatWalletID = request.form["fiatWalletID"]
             dogecoinWalletID = request.form["dogecoinWalletID"]
-            orderTimestamp = pk_generator.get_datetime()
-            print(orderTimestamp)
             global pk_exchangeOrders
             exchangeID, pk_exchangeOrders = pk_generator.generate_pk_exchangeOrders(pk_exchangeOrders)
+            orderTimestamp = pk_generator.get_datetime()
             query = f'INSERT INTO exchangeOrders (exchangeID, fiatWalletID, dogecoinWalletID, orderTimestamp, orderType, orderDirection, amountFilled, orderPrice) VALUES ("{exchangeID}", "{fiatWalletID}", "{dogecoinWalletID}", "{orderTimestamp}","{orderType}", "{orderDirection}", {amountFilled}, {orderPrice})'
-            print(query)
             cur = mysql.connection.cursor()
             cur.execute(query)
             mysql.connection.commit()
@@ -174,7 +172,26 @@ def dogecointransaction():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-    return render_template("dogecoinTransactionsEntity.html",transactions=data)
+        return render_template("dogecoinTransactionsEntity.html",transactions=data)
+    
+    if request.method == "POST":
+        if request.form.get("Search"):
+            print("Search query")
+            return render_template("dogecoinTransactionsEntity.html", transactions=data)
+        else:
+            amount = request.form["amount"]
+            txDirection = request.form["txDirection"]
+            dogecoinWalletID = request.form["dogecoinWalletID"]
+            global externalWalletID, pk_dogecoinTransactions, transactionHash
+            txID, pk_dogecoinTransactions = pk_generator.generate_pk_dogecoinTransactions(pk_dogecoinTransactions)
+            externalWalletAddress, externalWalletID = pk_generator.generate_external_wallet_id(externalWalletID)
+            txHash, transactionHash = pk_generator.generate_transaction_hash(transactionHash)
+            txTimestamp = pk_generator.get_datetime()
+            query = f'INSERT INTO dogecoinTransactions (txID, txTimestamp, amount, txDirection, dogecoinWalletID, externalWalletAddress, txHash) VALUES ("{txID}", "{txTimestamp}", {amount},"{txDirection}", "{dogecoinWalletID}", "{externalWalletAddress}", "{txHash}")'
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            mysql.connection.commit()
+            return redirect(url_for("dogecointransaction"))
 
 @app.route('/dogecoinTransactionsForm.html')
 def dogecointransactionform():
