@@ -95,6 +95,7 @@ def fiatwallet():
             query = f'UPDATE fiatWallets SET fiatBalance = {fiatBalance}, fiatWalletName = "{fiatWalletName} WHERE fiatWalletID = "{fiatWalletID}"'
             cur = mysql.connection.cursor()
             cur.execute(query)
+            mysql.connection.commit()
             return redirect(url_for(fiatwallet))
 
     
@@ -123,6 +124,7 @@ def dogecoinwallet():
             query = f'UPDATE fiatWallets SET dogecoinBalance = {dogecoinBalance} WHERE dogecoinWalletID = "{dogecoinWalletID}" AND walletAddress = "{walletAddress}"'
             cur = mysql.connection.cursor()
             cur.execute(query)
+            mysql.connection.commit()
             return redirect(url_for(dogecoinwallet))
 
 @app.route('/dogecoinWalletsForm.html')
@@ -141,7 +143,7 @@ def exchangeorder():
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("fiatWalletsEntity.html", exchangeOrders=data)
+            return render_template("exchangeOrdersEntity.html", exchangeOrders=data)
         else:
             orderType = request.form["orderType"]
             orderDirection = request.form["orderDirection"]
@@ -157,7 +159,8 @@ def exchangeorder():
             print(query)
             cur = mysql.connection.cursor()
             cur.execute(query)
-            return redirect(url_for(exchangeorder))
+            mysql.connection.commit()
+            return redirect(url_for("exchangeorder"))
     
 
 @app.route('/exchangeOrdersForm.html')
