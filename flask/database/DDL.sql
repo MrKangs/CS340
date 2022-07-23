@@ -13,6 +13,7 @@ SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE fiatWallets (
   fiatWalletID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'F' followed by an int combination */
+  fiatWalletName varchar(50),
   fiatBalance decimal(15,2) NOT NULL
 );
 

@@ -1,5 +1,6 @@
 import random
 import string
+import datetime
 
 def generate_pk_userAccounts(number:int):
     pk_value = str("U" + str(number))
@@ -41,3 +42,9 @@ def generate_transaction_hash(redundant_set: set):
             redundant_set.add(value)
             break
     return value, redundant_set
+
+def get_datetime():
+    value = datetime.datetime.now()
+    # "2020-07-21 12:03:33"
+    value = f"{value.year}-{value.month}-{value.day} {value.hour}:{value.minute}:{value.second}"
+    return value
