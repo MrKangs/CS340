@@ -96,7 +96,7 @@ def fiatwallet():
             cur = mysql.connection.cursor()
             cur.execute(query)
             mysql.connection.commit()
-            return redirect(url_for(fiatwallet))
+            return redirect(url_for("fiatwallet"))
 
     
 
@@ -125,7 +125,7 @@ def dogecoinwallet():
             cur = mysql.connection.cursor()
             cur.execute(query)
             mysql.connection.commit()
-            return redirect(url_for(dogecoinwallet))
+            return redirect(url_for("dogecoinwallet"))
 
 @app.route('/dogecoinWalletsForm.html')
 def dogecoinwalletform():
