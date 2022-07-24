@@ -1,18 +1,12 @@
 var length_of_data = document.getElementById("length").innerHTML;
-var checkbox_tags = [];
+var checkbox_list = document.getElementsByClassName("checkbox");
 for (let i = 0; i < length_of_data; i++){
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.name = "select";
     checkbox.value = i;
-    checkbox_tags.push(checkbox);
+    checkbox_list[i].appendChild(checkbox);
 }
-
-var checkbox_list = document.getElementsByClassName("checkbox");
-for (let i = 0; i < length_of_data; i++){
-    checkbox_list[i].appendChild(checkbox_tags[i]);
-}
-
 
 
 // Execute the function when the user presses the return button to search for a
