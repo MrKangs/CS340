@@ -5,8 +5,8 @@
     <title>DOGE-X</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="Entity.js" charset="utf-8" defer></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/Entity.js')}}" defer></script>
     
 </head>
 <header>
@@ -25,6 +25,11 @@
 </header>
 <body>
     <h2>Exchange Orders</h2>
+    <p hidden id="length"></p>
+    <script type="text/javascript">
+        let length = {{length|tojson}};
+        document.getElementById("length").innerHTML = length;
+    </script>
     <div class="search-bar">
         <div class="search-field" onkeypress="return didPressReturn(event)">
             <input type="text" placeholder="User Name" name="search">
@@ -64,7 +69,7 @@
             <tbody>
                 {% for order in exchangeOrders %}
                 <tr>
-                    <td><input type="checkbox" name="select" value="1"></td>
+                    <td class="checkbox"></td>
                     {% for key in order.keys() %}
                     <td>{{order[key]}}</td>
                     {% endfor %}

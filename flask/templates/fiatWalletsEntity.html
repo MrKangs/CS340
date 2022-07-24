@@ -5,8 +5,8 @@
     <title>DOGE-X</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="Entity.js" charset="utf-8" defer></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/Entity.js')}}" defer></script>
 </head>
 <header>
     <div class="header">
@@ -24,6 +24,11 @@
 </header>
 <body>
     <h2>Fiat Wallets</h2>
+    <p hidden id="length"></p>
+    <script type="text/javascript">
+        let length = {{length|tojson}};
+        document.getElementById("length").innerHTML = length;
+    </script>
     <div class="button-bar">
         <div class="button">
             <button type="button" class="update-button"
@@ -47,7 +52,7 @@
             <tbody>
                 {% for fiatwallet in fiatwallets %}
                 <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
+                    <td class="checkbox"></td>
                     {% for key in fiatwallet.keys() %}
                     <td>{{fiatwallet[key]}}</td>
                     {% endfor %}

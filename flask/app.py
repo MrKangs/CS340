@@ -17,6 +17,7 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
 
 # Variables
+
 pk_userAccounts = 0
 pk_fiatWallets = 0
 pk_dogecoinWallets = 0
@@ -39,12 +40,12 @@ def user():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("userAccountsEntity.html", users=data)
+        return render_template("userAccountsEntity.html", users=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("userAccountsEntity.html", users=data)
+            return render_template("userAccountsEntity.html", users=data, length=len(data))
         else:
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
@@ -82,12 +83,12 @@ def fiatwallet():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("fiatWalletsEntity.html", fiatwallets=data)
+        return render_template("fiatWalletsEntity.html", fiatwallets=data, length=len(data))
 
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("fiatWalletsEntity.html", fiatwallets=data)
+            return render_template("fiatWalletsEntity.html", fiatwallets=data, length=len(data))
         else:
             fiatWalletID = request.form["fiatWalletID"]
             fiatBalance = request.form["fiatWalletBalance"]
@@ -111,12 +112,12 @@ def dogecoinwallet():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("dogecoinWalletsEntity.html", dogecoinWallets=data)
+        return render_template("dogecoinWalletsEntity.html", dogecoinWallets=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("fiatWalletsEntity.html", dogecoinWallets=data)
+            return render_template("fiatWalletsEntity.html", dogecoinWallets=data, length=len(data))
         else:
             dogecoinWalletID = request.form["dogecoinWalletID"]
             walletAddress = request.form["walletAddress"]
@@ -138,12 +139,12 @@ def exchangeorder():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("exchangeOrdersEntity.html", exchangeOrders=data)
+        return render_template("exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("exchangeOrdersEntity.html", exchangeOrders=data)
+            return render_template("exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
         else:
             orderType = request.form["orderType"]
             orderDirection = request.form["orderDirection"]
@@ -172,12 +173,12 @@ def dogecointransaction():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("dogecoinTransactionsEntity.html",transactions=data)
+        return render_template("dogecoinTransactionsEntity.html",transactions=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("dogecoinTransactionsEntity.html", transactions=data)
+            return render_template("dogecoinTransactionsEntity.html", transactions=data, length=len(data))
         else:
             amount = request.form["amount"]
             txDirection = request.form["txDirection"]
