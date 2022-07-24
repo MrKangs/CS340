@@ -1,93 +1,92 @@
-<!DOCTYPE html> 
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>DOGE-X</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <script src="Entity.js" charset="utf-8" defer></script>
-</head>
-<header>
-    <!-- <div class="header"> -->
-        <navbar class="navbar">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <h1><a href="../index.html">DOGE-X</a></h1>
-                </li>
-                <li class="nav-item">
-                    <a href="./userAccountsEntity.html">User Accounts</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./fiatWalletsEntity.html">Fiat Wallets</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./dogecoinWalletsEntity.html">Dogecoin Wallets</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./exchangeOrdersEntity.html">Exchange Orders</a>
-                </li>
-            </ul>
-        </navbar>
-    <!-- </div> -->
-</header>
-<body>
-    <h2>Fiat Wallets</h2>
-    <div class="table-nav-bar">
-        <div class="search-bar">
-            <div class="search-field" onkeypress="return didPressReturn(event)">
-                <input type="text" placeholder="User Name" name="search">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="userAccountsEntity.html">User Accounts</a>
             </div>
-            <div class="search-button">
-                <button type="button" onclick="search()">Search</button>
+            <div class="nav-item">
+                <a href="fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="exchangeOrdersEntity.html">Exchange Orders</a>
             </div>
         </div>
-        <div class="button-bar">
-            <div class="button">
-                <button type="button" class="update-button"
-                onclick="location.href='../forms/fiatWalletsForm.html'">Update</button>
-            </div>
-            <div class="button">
-                <button type="button" class="delete-button">Delete</button>
+    </div>
+    <body>
+        <div class="header-container">
+            <div class="header">
+                <h2>Fiat Wallets</h2>
             </div>
         </div>
-    <div class="table">
-        <table>
-            <thead>            
-                <tr>
-                    <th>Select</th>
-                    <th>Fiat Wallet ID</th>
-                    <th>Fiat Balance ($)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F12348904</td>
-                    <td>55.00</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F19032485</td>
-                    <td>15789.00</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="select" id="row_selection"></td>
-                    <td>F39002134</td>
-                    <td>34578.00</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
-<footer>
-    <div class="footer">
-        <p>
-            &copy; Copyright 2022 | Group 50 - Mark Jordan and Kenneth Kang | All Rights Reserved.
-        </p>
-    </div>
-</footer>
+        <div class="table-nav-bar-container">
+            <div class="search-bar">
+                <div class="search-text-box">
+                    <input type="text" placeholder="Search User by Name...">
+                </div>
+                <div class="search-button">
+                    <button>Search</button>
+                </div>
+            </div>
+            <div class="crud-buttons">
+                <div class="crud-button">
+                    <button onclick="location.href='../forms/fiatWalletsForm.html'">Update</button>
+                </div>
+                <div class="crud-button">
+                    <button onclick="location.href='../forms/fiatWalletsForm.html'">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table>
+                <thead>            
+                    <tr>
+                        <th>Select</th>
+                        <th>Fiat Wallet ID</th>
+                        <th>Fiat Balance ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="select" value="1"></td>
+                        <td>F12348904</td>
+                        <td>55.00</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="select" value="2"></td>
+                        <td>F19032485</td>
+                        <td>15789.00</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="select" value="3"></td>
+                        <td>F39002134</td>
+                        <td>34578.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <footer>
+        <div class="footer-text">
+            <p>
+                &copy; Copyright 2022 | Group 50 - Mark Jordan and Kenneth Kang
+                | All Rights Reserved.
+            </p>
+        </div>
+    </footer>
 </html>
