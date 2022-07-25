@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+        <script src="../scripts/Form.js" charset="utf-8" defer></script>
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../../../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p hidden id="query">{{order|tojson}}</p>
+        <h2>Exchange Order Record Form</h2>
+        <form method="post" action="exchangeOrdersEntity.html">
+    
+            <label for="exchangeID">Exchange Order ID:</label>
+            <input type="text" id="exchangeID" name="exchangeID" placeholder="Exchange Order ID">
+    
+            <label for="fiatWalletID">Fiat Wallet ID:</label>
+            <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID">
+    
+            <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
+            <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+    
+            <label for="orderTimestamp">Order Timestamp:</label>
+            <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp">
+    
+            <label for="orderType">Order Type:</label>
+            <input type="text" id="orderType" name="orderType" placeholder="Order Type">
+    
+            <label for="orderDirection">Order Direction:</label>
+            <input type="text" id="orderDirection" name="orderDirection" placeholder="Order Direction">
+    
+            <label for="amountFilled">Amount Filled:</label>
+            <input type="text" id="amountFilled" name="amountFilled" placeholder="Amount Filled">
+    
+            <label for="orderPrice">Order Price:</label>
+            <input type="text" id="orderPrice" name="orderPrice" placeholder="Order Price">
+            
+            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+        </form>
+    </body>
+    <footer>
+        <div class="footer">
+            <p>
+                &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>

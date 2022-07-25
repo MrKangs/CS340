@@ -1,38 +1,45 @@
-<!DOCTYPE html> 
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>DOGE-X</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<header>
-    <div class="header">
-        <div class="home-button">
-            <h1><a href=index.html>DOGE-X</a></h1>
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="index.html">DOGE-X</a>
         </div>
-        <div class="navbar">
-            <a href="userAccountsEntity.html">User Accounts</a>
-            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
-            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
-            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
-            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="./entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
         </div>
     </div>
-</header>
-<body>
-    <div class="subheader">
+    <body>
         <p>
-            This is the home page of the website.
+            Home page is currently under construction. Select an item in the
+            navigation bar to view the corresponding database entity.
         </p>
-    </div>
-</body>
-<footer>
-    <div class="footer">
-        <p>
-            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
-        </p>
-    </div>
-</footer>
+    </body>
+    <footer>
+        <div class="footer-text">
+            <p>
+                &copy; Copyright 2022 | Group 50 - Mark Jordan and Kenneth Kang
+                | All Rights Reserved.
+            </p>
+        </div>
+    </footer>
 </html>

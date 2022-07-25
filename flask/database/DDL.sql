@@ -13,6 +13,7 @@ SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE fiatWallets (
   fiatWalletID varchar(50) NOT NULL PRIMARY KEY, /* It will have a prefix of 'F' followed by an int combination */
+  fiatWalletName varchar(50),
   fiatBalance decimal(15,2) NOT NULL
 );
 
@@ -127,6 +128,6 @@ VALUES ('T1', '2022-06-27 13:10:11', 6200.056347843, 'Deposit', 'D12345789', 'DP
 ('T13', '2022-07-06 13:10:11', 155000.111789043, 'Deposit', 'D88832435', 'DDzejugjtXPUZrUtTAojBPAop4U4fYHfZn', '1e2e6b087ac2b8f025e730d340be4dfaa7c29080a82c181c4d551919a517b506'),
 ('T14', '2022-07-06 15:10:15', 4782.756744443, 'Withdrawal', 'D88832435', 'DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy', '0bd1489941f263d0076efe3b4e980299d67ac918cba49c6b3245d5980175eeec');
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

@@ -61,12 +61,12 @@ WHERE userAccounts.firstName = 'John' AND userAccounts.lastName = 'Doe';
 /* Insert into userAccounts table */
 -- When an userAccount Record is created, fiatWallet and dogecoinWallet records will created a new record as well.
 
-INSERT INTO fiatWallets (fiatWalletID, fiatBalance) 
-VALUES ("F12222393", 0);
+INSERT INTO fiatWallets (fiatWalletID, fiatWalletName, fiatBalance) 
+VALUES ("F12222393", "My New Wallet", 0);
 -- The fiatWalletID will be auto generated with the similiar syntax style, but the fiatBalance will be 0 always since it is new.
 
-INSERT INTO dogecoinWallets (dogecoinWalletID, dogecoinBalance) 
-VALUES ("D12222393", 0);
+INSERT INTO dogecoinWallets (dogecoinWalletID, walletAddress,dogecoinBalance) 
+VALUES ("D12222393", "DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy",0);
 -- The dogecoinWalletID will be auto generated with the similiar syntax style, but the dogecoinBalance will be 0 always since it is new.
 
 INSERT INTO userAccounts (userID, firstName, lastName, address, city, state, zipCode, phoneNumber, email, password, fiatWalletID, dogecoinWalletID) 

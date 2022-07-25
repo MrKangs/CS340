@@ -1,0 +1,69 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+        <script src="../scripts/Form.js" charset="utf-8" defer></script>
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../../../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p hidden id="query">{{dogecointransaction|tojson}}</p>
+        <h2>Dogecoin Transaction Record Form</h2>
+        <form method="post" action="dogecoinTransactionsEntity.html">
+    
+            <label for="txID">TX ID:</label>
+            <input type="text" id="txID" name="txID" placeholder="TX ID">
+    
+            <label for="txTimestamp">TX Timestamp:</label>
+            <input type="text" id="txTimestamp" name="txTimestamp" placeholder="TX Timestamp">
+    
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" placeholder="Amount">
+    
+            <label for="txDirection">TX Direction:</label>
+            <input type="text" id="txDirection" name="txDirection" placeholder="TX Direction">
+    
+            <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
+            <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+    
+            <label for="externalWalletAddress">External Wallet Address:</label>
+            <input type="text" id="externalWalletAddress" name="externalWalletAddress" placeholder="External Wallet Address">
+    
+            <label for="txHash">TX Hash:</label>
+            <input type="text" id="txHash" name="txHash" placeholder="TX Hash">
+            
+            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+        </form>
+    </body>
+    <footer>
+        <div class="footer">
+            <p>
+                &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>
