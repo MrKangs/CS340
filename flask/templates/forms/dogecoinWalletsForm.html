@@ -10,27 +10,28 @@
     </head>
     <div class="nav-bar-container">
         <div class="nav-home-button">
-            <a href="../index.html">DOGE-X</a>
+            <a href="../../../index.html">DOGE-X</a>
         </div>
         <div class="nav-bar">
             <div class="nav-item">
-                <a href="../entities/userAccountsEntity.html">User Accounts</a>
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
             </div>
             <div class="nav-item">
-                <a href="../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
             </div>
             <div class="nav-item">
-                <a href="../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
             </div>
             <div class="nav-item">
-                <a href="../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
             </div>
             <div class="nav-item">
-                <a href="../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
             </div>
         </div>
     </div>
     <body>
+        <p hidden id="query">{{dogecoinwallet|tojson}}</p>
         <h2>Dogecoin Wallet Record Form</h2>
         <form method="post" action="dogecoinWalletsEntity.html">
             

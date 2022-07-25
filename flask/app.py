@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 import os
 from flask_mysqldb import MySQL
 from flask import request
@@ -46,45 +46,50 @@ def user():
         if request.form.get("Search"):
             print("Search query")
             return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))
-        else:
-            firstName = request.form["firstName"]
-            lastName = request.form["lastName"]
-            address = request.form["address"]
-            city = request.form["city"]
-            state = request.form["state"]
-            zipCode = request.form["zipCode"]
-            phoneNumber = request.form["phoneNumber"]
-            email = request.form["email"]
-            password = request.form["password"]
-            global pk_userAccounts, pk_fiatWallets, pk_dogecoinWallets, dogecoinWalletAddress
-            userID, pk_userAccounts = pk_generator.generate_pk_userAccounts(pk_userAccounts)
-            fiatWalletID, pk_fiatWallets = pk_generator.generate_pk_fiatWallets(pk_fiatWallets)
-            dogecoinWalletID, pk_dogecoinWallets = pk_generator.generate_pk_dogecoinWallets(pk_dogecoinWallets)
-            walletAddress, dogecoinWalletAddress = pk_generator.generate_dogecoin_wallet_address(dogecoinWalletAddress)
 
-            query1 = f'INSERT INTO fiatWallets (fiatWalletID, fiatBalance) VALUES ("{fiatWalletID}", {0})'
-            query2 = f'INSERT INTO dogecoinWallets (dogecoinWalletID, walletAddress ,dogecoinBalance) VALUES ("{dogecoinWalletID}","{walletAddress}",{0})'
-            query3 = f'INSERT INTO userAccounts (userID, firstName, lastName, address, city, state, zipCode, phoneNumber, email, password, fiatWalletID, dogecoinWalletID) VALUES ("{userID}", "{firstName}", "{lastName}", "{address}", "{city}", "{state}", "{zipCode}", "{phoneNumber}", "{email}", "{password}", "{fiatWalletID}", "{dogecoinWalletID}")'
-            cur = mysql.connection.cursor()
-            cur.execute(query1)
-            cur.execute(query2)
-            cur.execute(query3)
-            mysql.connection.commit()
-            return redirect(url_for("user"))
+@app.route('/forms/userAccountsEntity.html', methods=["POST"])
+def userRedirect():
+    firstName = request.form["firstName"]
+    lastName = request.form["lastName"]
+    address = request.form["address"]
+    city = request.form["city"]
+    state = request.form["state"]
+    zipCode = request.form["zipCode"]
+    phoneNumber = request.form["phoneNumber"]
+    email = request.form["email"]
+    password = request.form["password"]
+    global pk_userAccounts, pk_fiatWallets, pk_dogecoinWallets, dogecoinWalletAddress
+    userID, pk_userAccounts = pk_generator.generate_pk_userAccounts(pk_userAccounts)
+    fiatWalletID, pk_fiatWallets = pk_generator.generate_pk_fiatWallets(pk_fiatWallets)
+    dogecoinWalletID, pk_dogecoinWallets = pk_generator.generate_pk_dogecoinWallets(pk_dogecoinWallets)
+    walletAddress, dogecoinWalletAddress = pk_generator.generate_dogecoin_wallet_address(dogecoinWalletAddress)
+    query1 = f'INSERT INTO fiatWallets (fiatWalletID, fiatBalance) VALUES ("{fiatWalletID}", {0})'
+    query2 = f'INSERT INTO dogecoinWallets (dogecoinWalletID, walletAddress ,dogecoinBalance) VALUES ("{dogecoinWalletID}","{walletAddress}",{0})'
+    query3 = f'INSERT INTO userAccounts (userID, firstName, lastName, address, city, state, zipCode, phoneNumber, email, password, fiatWalletID, dogecoinWalletID) VALUES ("{userID}", "{firstName}", "{lastName}", "{address}", "{city}", "{state}", "{zipCode}", "{phoneNumber}", "{email}", "{password}", "{fiatWalletID}", "{dogecoinWalletID}")'
+    cur = mysql.connection.cursor()
+    cur.execute(query1)
+    cur.execute(query2)
+    cur.execute(query3)
+    mysql.connection.commit()
+    return redirect(url_for("user"))
 
-@app.route('/forms/userAccountsForm.html', methods=["GET"])
+
+@app.route('/forms/userAccountsForm.html')
 def userform():
     return render_template("/forms/userAccountsForm.html")
 
-@app.route('/forms/userAccountsForm.html/<pk>', methods = ["POST"])
-def userformupdatesearch(pk):
-    # userID, dummy = pk_generator.generate_pk_userAccounts(pk)
-    # query = f'SELECT * FROM userAccounts WHERE userID = "{userID}"'
-    # cur = mysql.connection.cursor()
-    # cur.execute(query)
-    # data = cur.fetchall()
-    # data = jsonify(query)
-    return redirect(url_for("userform"))
+@app.route('/forms/userAccountsForm.html/<inputdata>', methods=["POST", "GET"])
+def userformupdatepost(inputdata):
+    if request.method == "POST":
+        return redirect(url_for("userformupdatepost", inputdata=inputdata))
+    if request.method == "GET":
+        userID, dummy = pk_generator.generate_pk_userAccounts(int(inputdata))
+        query = f'SELECT * FROM userAccounts WHERE userID = "{userID}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template("/forms/userAccountsForm.html", user=data)
+
 
 @app.route('/entities/fiatWalletsEntity.html', methods=["POST", "GET"])
 def fiatwallet():
@@ -108,12 +113,25 @@ def fiatwallet():
             cur.execute(query)
             mysql.connection.commit()
             return redirect(url_for("fiatwallet"))
-
-    
+   
 
 @app.route('/forms/fiatWalletsForm.html')
 def fiatwalletform():
     return render_template("/forms/fiatWalletsForm.html")
+
+@app.route('/forms/fiatWalletsForm.html/<inputdata>', methods=["POST", "GET"])
+def fiatwalletformupdatepost(inputdata):
+    if request.method == "POST":
+        return redirect(url_for("fiatwalletformupdatepost",inputdata=inputdata))
+    if request.method == "GET":
+        print(inputdata)
+        fiatWalletID, dummy = pk_generator.generate_pk_fiatWallets(int(inputdata))
+        query = f'SELECT * FROM fiatWallets WHERE fiatWalletID = "{fiatWalletID}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchone()
+        return render_template("/forms/fiatWalletsForm.html", fiatwallet=data)
+
 
 @app.route('/entities/dogecoinWalletsEntity.html', methods=["POST", "GET"])
 def dogecoinwallet():
@@ -141,6 +159,18 @@ def dogecoinwallet():
 @app.route('/forms/dogecoinWalletsForm.html')
 def dogecoinwalletform():
     return render_template("/forms/dogecoinWalletsForm.html")
+
+@app.route('/forms/dogecoinWalletsForm.html/<inputdata>', methods=["POST", "GET"])
+def dogecoinwalletformupdatepost(inputdata):
+    if request.method == "POST":
+        return redirect(url_for("dogecoinwalletformupdatepost",inputdata=inputdata))
+    if request.method == "GET":
+        dogecoinWalletID, dummy = pk_generator.generate_pk_dogecoinWallets(int(inputdata))
+        query = f'SELECT * FROM dogecoinWallets WHERE dogecoinWalletID = "{dogecoinWalletID}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchone()
+        return render_template("/forms/dogecoinWalletsForm.html", dogecoinwallet=data)
 
 @app.route('/entities/exchangeOrdersEntity.html', methods=["POST", "GET"])
 def exchangeorder():
@@ -176,6 +206,18 @@ def exchangeorder():
 def exchangeorderform():
     return render_template("/forms/exchangeOrdersForm.html")
 
+@app.route('/forms/exchangeOrdersForm.html/<inputdata>', methods=["POST", "GET"])
+def exchangeorderformupdatepost(inputdata):
+    if request.method == "POST":
+        return redirect(url_for("exchangeorderformupdatepost",inputdata=inputdata))
+    if request.method == "GET":
+        exchangeID, dummy = pk_generator.generate_pk_exchangeOrders(int(inputdata))
+        query = f'SELECT * FROM exchangeOrders WHERE exchangeID = "{exchangeID}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchone()
+        return render_template("/forms/exchangeOrdersForm.html", exchangeorder=data)
+
 @app.route('/entities/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
 def dogecointransaction():
     if request.method == "GET":
@@ -207,6 +249,18 @@ def dogecointransaction():
 @app.route('/forms/dogecoinTransactionsForm.html')
 def dogecointransactionform():
     return render_template("/forms/dogecoinTransactionsForm.html")
+
+@app.route('/forms/dogecoinTransactionsForm.html/<inputdata>', methods=["POST", "GET"])
+def dogecointransactionformupdatepost(inputdata):
+    if request.method == "POST":
+        return redirect(url_for("dogecointransactionformupdatepost",inputdata=inputdata))
+    if request.method == "GET":
+        txID, dummy = pk_generator.generate_pk_dogecoinTransactions(int(inputdata))
+        query = f'SELECT * FROM dogecoinTransactions WHERE txID = "{txID}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchone()
+        return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction=data)
 
 @app.route('/index.html')
 def reroute():

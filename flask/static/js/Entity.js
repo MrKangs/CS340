@@ -10,7 +10,12 @@ for (let i = 0; i < length_of_data; i++){
 }
 
 const html_pairs = {
-    "/userAccountsEntity.html":"/userAccountsForm.html"
+    "/entities/userAccountsEntity.html":"/forms/userAccountsForm.html",
+    "/entities/fiatWalletsEntity.html":"/forms/fiatWalletsForm.html",
+    "/entities/dogecoinWalletsEntity.html":"/forms/dogecoinWalletsForm.html",
+    "/entities/dogecoinTransactionsEntity.html":"/forms/dogecoinTransactionsForm.html",
+    "/entities/exchangeOrdersEntity.html":"/forms/exchangeOrdersForm.html"
+
 }
 
 function onUpdate(){
@@ -21,26 +26,31 @@ function onUpdate(){
     for (let i = 0; i < checkbox_list.length; i++){
         var id_name = "checkbox-"+i;
         var checkbox = document.getElementById(id_name);
+        if (checkbox.checked && isSelected == true){
+            alert("Please select only one record for update!");
+            break;
+        }
         if(checkbox.checked && isSelected == false){
             isSelected = true;
             selectedCheckbox = checkbox;
         }
-        else{
-            alert("Please select only one record for update!");
-            return 0;
-        }
+    }
+    if(isSelected == false){
+        alert("Please select one record for update!");
+        return false;
     }
     var html_location = window.location.pathname;
-    console.log(html_location);
-    var value = selectedCheckbox.value;
-    console.log(value);
+    var checkbox_value = selectedCheckbox.value;
     html_location = html_pairs[html_location];
-    console.log(html_location);
     const request = new XMLHttpRequest();
-    request.open('POST', `${html_location}/${value}`);
+    request.open('POST', `${html_location}/${checkbox_value}`, true);
     request.send();
-    return 1;
+    return `${html_location}/${checkbox_value}`;
 }
+
+
+
+
 
 // Execute the function when the user presses the return button to search for a
 // database record.
