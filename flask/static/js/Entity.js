@@ -22,13 +22,14 @@ function onUpdate(){
     var checkbox_list = document.getElementsByClassName("checkbox");
     var isSelected = false;
     var selectedCheckbox;
+    var html_location = window.location.pathname;
 
     for (let i = 0; i < checkbox_list.length; i++){
         var id_name = "checkbox-"+i;
         var checkbox = document.getElementById(id_name);
         if (checkbox.checked && isSelected == true){
             alert("Please select only one record for update!");
-            break;
+            return html_location;
         }
         if(checkbox.checked && isSelected == false){
             isSelected = true;
@@ -37,7 +38,7 @@ function onUpdate(){
     }
     if(isSelected == false){
         alert("Please select one record for update!");
-        return false;
+        return html_location;
     }
     var html_location = window.location.pathname;
     var checkbox_value = selectedCheckbox.value;
