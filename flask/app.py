@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, jsonify, render_template, redirect, url_for
 import os
 from flask_mysqldb import MySQL
 from flask import request
@@ -72,9 +72,19 @@ def user():
             mysql.connection.commit()
             return redirect(url_for("user"))
 
-@app.route('/userAccountsForm.html')
+@app.route('/userAccountsForm.html', methods=["GET"])
 def userform():
     return render_template("userAccountsForm.html")
+
+@app.route('/userAccountsForm.html/<pk>', methods = ["POST"])
+def userformupdatesearch(pk):
+    # userID, dummy = pk_generator.generate_pk_userAccounts(pk)
+    # query = f'SELECT * FROM userAccounts WHERE userID = "{userID}"'
+    # cur = mysql.connection.cursor()
+    # cur.execute(query)
+    # data = cur.fetchall()
+    # data = jsonify(query)
+    return redirect(url_for("userform"))
 
 @app.route('/fiatWalletsEntity.html', methods=["POST", "GET"])
 def fiatwallet():

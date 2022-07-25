@@ -45,7 +45,7 @@
         </div>
         <div class="button">
             <button type="button" class="update-button"
-            onclick="location.href='userAccountsForm.html'">Update</button>
+            onclick="onUpdate()">Update</button>
         </div>
         <div class="button">
             <button type="button" class="delete-button">Delete</button>
@@ -73,7 +73,7 @@
             <tbody>
                 {% for profile in users %}
                 <tr>
-                    <td class="checkbox"></td> <!-- We need to work around with the value part -->
+                    <td class="checkbox"></td>
                     {% for key in profile.keys() %}
                     <td>{{profile[key]}}</td>
                     {% endfor %}
