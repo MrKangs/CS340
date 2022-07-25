@@ -1,0 +1,252 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    background: #f1ece0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nav-bar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    top: 0;
+    align-items: center;
+    text-align: center;
+    background: #1e4150;
+}
+
+/* Div Container Testing */
+/* .nav-bar-container div {
+    border: 1px solid black;
+} */
+
+.nav-bar {
+    display: flex;
+    margin-right: 2rem;
+}
+
+.nav-item {
+    color: #f1ece0;
+    list-style: none;
+    margin-left: 2rem;
+}
+
+.nav-item a {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17pt;
+    color: #FFFFFF;
+}
+
+.nav-home-button {
+    margin-left: 2rem;
+}
+
+.nav-home-button a {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25pt;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+/* HEADER */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Div Container Testing */
+/* .header-container div {
+    border: 1px solid black;
+} */
+
+h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17pt;
+    color: black;
+}
+
+/* TABLE NAV BAR: SEARCH BAR AND CRUD BUTTONS */
+.table-nav-bar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    /* background: #1e4150; */
+}
+
+.search-bar {
+    display: flex;
+    margin-left: 20rem;
+}
+
+.search-text-box {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.search-text-box input {
+    border: 1px solid black;
+    border-radius: 2.5px;
+    padding: 5px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    width: 300px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12pt;
+    color: black;
+}
+
+.search-text-box input::placeholder {
+
+}
+
+.search-button {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.search-button button {
+    border-radius: 2.5px;
+    border-width: 1.5px;
+    border-color: #1E4150;
+    background-color: #FFFFFF;
+    height: 35px;
+    width: 100px;
+    padding: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size: 12pt;
+}
+
+.search-button button:hover {
+    background-color: #DFCE88;
+    transition: 0.5s;
+}
+
+.search-button button:active {
+    background-color: #3c96bc;
+    transition: 0.3s;
+}
+
+.crud-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* background: #1e4150; */
+    margin-right: 20rem;
+}
+
+.crud-button {
+    margin-left: 1rem;
+}
+
+.crud-button button {
+    border-radius: 2.5px;
+    border-width: 1.5px;
+    border-color: #1E4150;
+    background-color: #FFFFFF;
+    height: 35px;
+    width: 100px;
+    padding: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size: 12pt;
+}
+
+.crud-button button:hover {
+    background-color: #DFCE88;
+    transition: 0.5s;
+}
+
+.crud-button button:active {
+    background-color: #3c96bc;
+    transition: 0.3s;
+}
+
+/* TABLE */
+.table {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.table td, table.table th {
+    border: 1px solid #CCA847;
+    padding: 3px 2px;
+}
+
+.table tbody td {
+    font-size: 13px;
+    padding: 0.5rem;
+}
+
+.table tr:nth-child(even) {
+    background: #DFCE88;
+}
+
+.table thead {
+    background: #1E4150;
+    border-bottom: 2px solid #CCA847;
+}
+
+.table thead th {
+    font-size: 17px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 1px solid #CCA847;
+    padding: 1rem;
+}
+
+.table thead th:first-child {
+    border-left: none;
+}
+
+.table tfoot td {
+    font-size: 14px;
+}
+
+.table tfoot .links {
+    text-align: right;
+}
+
+.table tfoot .links a {
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    background: #1e4150;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.footer-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12pt;
+}
