@@ -24,6 +24,7 @@ switch(value){
         document.getElementById("orderDirection").value = data["orderDirection"];
         document.getElementById("orderType").value = data["orderType"];
         document.getElementById("orderPrice").value = data["orderPrice"];
+        document.getElementById("title").innerText = "Update Exchange Order Record";
         break;
     case 1:
         document.getElementById("txID").value = data["txID"];
@@ -38,6 +39,7 @@ switch(value){
         document.getElementById("externalWalletAddress").readOnly = true;
         document.getElementById("txHash").value = data["txHash"];
         document.getElementById("txHash").readOnly = true;
+        document.getElementById("title").innerText= "Update Dogecoin Transaction Record";
         break;
     case 2:
         document.getElementById("userID").value = data["userID"];
@@ -55,12 +57,14 @@ switch(value){
         document.getElementById("fiatWalletID").readOnly = true;
         document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
         document.getElementById("dogecoinWalletID").readOnly = true;
+        document.getElementById("title").innerText = "Update User Account Record";
         break;
     case 3:
         document.getElementById("fiatWalletId").value = data["fiatWalletID"];
         document.getElementById("fiatWalletId").readOnly = true;
         document.getElementById("fiatWalletName").value = data["fiatWalletName"];
         document.getElementById("fiatWalletBalance").value = data["fiatBalance"];
+        document.getElementById("title").innerText = "Update Fiat Wallet Record";
         break;
     case 4:
         document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
@@ -68,5 +72,6 @@ switch(value){
         document.getElementById("walletAddress").value = data["walletAddress"];
         document.getElementById("walletAddress").readOnly = true;
         document.getElementById("dogecoinBalance").value = data["dogecoinBalance"];
+        document.getElementById("title").innerText = "Update Dogecoin Wallet Record";
         break;
 }
