@@ -87,7 +87,7 @@ def userformupdatepost(inputdata):
         query = f'SELECT * FROM userAccounts WHERE userID = "{userID}"'
         cur = mysql.connection.cursor()
         cur.execute(query)
-        data = cur.fetchall()
+        data = cur.fetchone()
         return render_template("/forms/userAccountsForm.html", user=data)
 
 

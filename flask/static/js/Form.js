@@ -1,4 +1,4 @@
-var identifier = {0: "exchangeID",1: "txID",2: "userID",3: "fiatWalletID",4:"dogecoinWalletID"};
+var identifier = { 0:"exchangeID", 1:"txID", 2:"userID", 3:"fiatWalletID" ,4:"dogecoinWalletID"};
 
 
 var data = JSON.parse(document.getElementById("query").innerHTML);
@@ -12,13 +12,49 @@ for (var i = 0; i<5; i++){
 
 switch(value){
     case 0:
-        console.log("exchangeID");
+        document.getElementById("exchangeID").value = data["exchangeID"];
+        document.getElementById("exchangeID").readOnly = true;
+        document.getElementById("fiatWalletID").value = data["fiatWalletID"];
+        document.getElementById("fiatWalletID").readOnly = true;
+        document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
+        document.getElementById("dogecoinWalletID").readOnly = true;
+        document.getElementById("orderTimestamp").value = data["orderTimestamp"];
+        document.getElementById("orderTimestamp").readOnly = true;
+        document.getElementById("amountFilled").value = data["amountFilled"];
+        document.getElementById("orderDirection").value = data["orderDirection"];
+        document.getElementById("orderType").value = data["orderType"];
+        document.getElementById("orderPrice").value = data["orderPrice"];
         break;
     case 1:
-        console.log("txID");
+        document.getElementById("txID").value = data["txID"];
+        document.getElementById("txID").readOnly = true;
+        document.getElementById("txTimestamp").value = data["txTimestamp"];
+        document.getElementById("txTimestamp").readOnly = true;
+        document.getElementById("amount").value = data["amount"];
+        document.getElementById("txDirection").value = data["txDirection"];
+        document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
+        document.getElementById("dogecoinWalletID").readOnly = true;
+        document.getElementById("externalWalletAddress").value = data["externalWalletAddress"];
+        document.getElementById("externalWalletAddress").readOnly = true;
+        document.getElementById("txHash").value = data["txHash"];
+        document.getElementById("txHash").readOnly = true;
         break;
     case 2:
-        console.log("userID");
+        document.getElementById("userID").value = data["userID"];
+        document.getElementById("userID").readOnly = true;
+        document.getElementById("firstName").value = data["firstName"];
+        document.getElementById("lastName").value = data["lastName"];
+        document.getElementById("email").value = data["email"];
+        document.getElementById("phoneNumber").value = data["phoneNumber"];
+        document.getElementById("address").value = data["address"];
+        document.getElementById("city").value = data["city"];
+        document.getElementById("state").value = data["state"];
+        document.getElementById("zipCode").value = data["zipCode"];
+        document.getElementById("password").value = data["password"];
+        document.getElementById("fiatWalletID").value = data["fiatWalletID"];
+        document.getElementById("fiatWalletID").readOnly = true;
+        document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
+        document.getElementById("dogecoinWalletID").readOnly = true;
         break;
     case 3:
         document.getElementById("fiatWalletId").value = data["fiatWalletID"];
@@ -27,9 +63,10 @@ switch(value){
         document.getElementById("fiatWalletBalance").value = data["fiatBalance"];
         break;
     case 4:
-        console.log("dogecoinWalletID");
+        document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
+        document.getElementById("dogecoinWalletID").readOnly = true;
+        document.getElementById("walletAddress").value = data["walletAddress"];
+        document.getElementById("walletAddress").readOnly = true;
+        document.getElementById("dogecoinBalance").value = data["dogecoinBalance"];
         break;
 }
-
-
-
