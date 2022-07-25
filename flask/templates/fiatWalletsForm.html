@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+<head>
+    <title>DOGE-X</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <script src="Form.js" charset="utf-8" defer></script> -->
+</head>
+<header>
+    <div class="header">
+        <h1><a href=index.html>DOGE-X</a></h1>
+        <div class="navbar">
+            <a href="userAccountsEntity.html">User Accounts</a>
+            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
+            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
+        </div>
+    </div>
+</header>
+<body>
+    <h2>Fiat Wallet Form</h2>
+    <form method="post" action="fiatWalletsEntity.html">
+        
+        <label for="fiatWalletId">Fiat Wallet ID:</label>
+        <input type="text" id="fiatWalletId" name="fiatWalletId" placeholder="Fiat Wallet ID">
+
+        <label for="fiatWalletName">Fiat Wallet Name:</label>
+        <input type="text" id="fiatWalletName" name="fiatWalletName" placeholder="Fiat Wallet Name">
+
+        <label for="fiatWalletBalance">Fiat Wallet Balance:</label>
+        <input type="text" id="fiatWalletBalance" name="fiatWalletBalance" placeholder="Fiat Wallet Balance">
+
+        <input type="submit" value="Save & Close" onclick="uploadRecord()">
+</body>
+<footer>
+    <div class="footer">
+        <p>
+            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+</html>
