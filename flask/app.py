@@ -33,19 +33,19 @@ transactionHash = {"92b1588447ab7f6857ae63185e2046a5a4aa3db0e79c8988f44a90219119
 def root():
     return render_template("index.html")
 
-@app.route('/userAccountsEntity.html', methods=["POST", "GET"])
+@app.route('/entities/userAccountsEntity.html', methods=["POST", "GET"])
 def user():
     if request.method == "GET":
         query = "SELECT * FROM userAccounts ORDER BY POSITION(left(userID, 1) IN 'U'), length(userID), userID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("userAccountsEntity.html", users=data, length=len(data))
+        return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("userAccountsEntity.html", users=data, length=len(data))
+            return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))
         else:
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
@@ -72,11 +72,11 @@ def user():
             mysql.connection.commit()
             return redirect(url_for("user"))
 
-@app.route('/userAccountsForm.html', methods=["GET"])
+@app.route('/forms/userAccountsForm.html', methods=["GET"])
 def userform():
-    return render_template("userAccountsForm.html")
+    return render_template("/forms/userAccountsForm.html")
 
-@app.route('/userAccountsForm.html/<pk>', methods = ["POST"])
+@app.route('/forms/userAccountsForm.html/<pk>', methods = ["POST"])
 def userformupdatesearch(pk):
     # userID, dummy = pk_generator.generate_pk_userAccounts(pk)
     # query = f'SELECT * FROM userAccounts WHERE userID = "{userID}"'
@@ -86,19 +86,19 @@ def userformupdatesearch(pk):
     # data = jsonify(query)
     return redirect(url_for("userform"))
 
-@app.route('/fiatWalletsEntity.html', methods=["POST", "GET"])
+@app.route('/entities/fiatWalletsEntity.html', methods=["POST", "GET"])
 def fiatwallet():
     if request.method == "GET":
         query = "SELECT * FROM fiatWallets ORDER BY POSITION(left(fiatWalletID, 1) IN 'F'), length(fiatWalletID), fiatWalletID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("fiatWalletsEntity.html", fiatwallets=data, length=len(data))
+        return render_template("/entities/fiatWalletsEntity.html", fiatwallets=data, length=len(data))
 
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("fiatWalletsEntity.html", fiatwallets=data, length=len(data))
+            return render_template("/entities/fiatWalletsEntity.html", fiatwallets=data, length=len(data))
         else:
             fiatWalletID = request.form["fiatWalletID"]
             fiatBalance = request.form["fiatWalletBalance"]
@@ -111,23 +111,23 @@ def fiatwallet():
 
     
 
-@app.route('/fiatWalletsForm.html')
+@app.route('/forms/fiatWalletsForm.html')
 def fiatwalletform():
-    return render_template("fiatWalletsForm.html")
+    return render_template("/forms/fiatWalletsForm.html")
 
-@app.route('/dogecoinWalletsEntity.html', methods=["POST", "GET"])
+@app.route('/entities/dogecoinWalletsEntity.html', methods=["POST", "GET"])
 def dogecoinwallet():
     if request.method == "GET":
         query = "SELECT * FROM dogecoinWallets ORDER BY POSITION(left(dogecoinWalletID, 1) IN 'D'), length(dogecoinWalletID), dogecoinWalletID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("dogecoinWalletsEntity.html", dogecoinWallets=data, length=len(data))
+        return render_template("/entities/dogecoinWalletsEntity.html", dogecoinWallets=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("fiatWalletsEntity.html", dogecoinWallets=data, length=len(data))
+            return render_template("/entities/dogecoinWalletsEntity.html", dogecoinWallets=data, length=len(data))
         else:
             dogecoinWalletID = request.form["dogecoinWalletID"]
             walletAddress = request.form["walletAddress"]
@@ -138,23 +138,23 @@ def dogecoinwallet():
             mysql.connection.commit()
             return redirect(url_for("dogecoinwallet"))
 
-@app.route('/dogecoinWalletsForm.html')
+@app.route('/forms/dogecoinWalletsForm.html')
 def dogecoinwalletform():
-    return render_template("dogecoinWalletsForm.html")
+    return render_template("/forms/dogecoinWalletsForm.html")
 
-@app.route('/exchangeOrdersEntity.html', methods=["POST", "GET"])
+@app.route('/entities/exchangeOrdersEntity.html', methods=["POST", "GET"])
 def exchangeorder():
     if request.method == "GET":
         query = "SELECT * FROM exchangeOrders ORDER BY POSITION(left(exchangeID, 1) IN 'E'), length(exchangeID), exchangeID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
+        return render_template("/entities/exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
+            return render_template("/entities/exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
         else:
             orderType = request.form["orderType"]
             orderDirection = request.form["orderDirection"]
@@ -172,23 +172,23 @@ def exchangeorder():
             return redirect(url_for("exchangeorder"))
     
 
-@app.route('/exchangeOrdersForm.html')
+@app.route('/forms/exchangeOrdersForm.html')
 def exchangeorderform():
-    return render_template("exchangeOrdersForm.html")
+    return render_template("/forms/exchangeOrdersForm.html")
 
-@app.route('/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
+@app.route('/entities/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
 def dogecointransaction():
     if request.method == "GET":
         query = "SELECT * FROM dogecoinTransactions ORDER BY POSITION(left(txID, 1) IN 'T'), length(txID), txID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        return render_template("dogecoinTransactionsEntity.html",transactions=data, length=len(data))
+        return render_template("/entities/dogecoinTransactionsEntity.html",transactions=data, length=len(data))
     
     if request.method == "POST":
         if request.form.get("Search"):
             print("Search query")
-            return render_template("dogecoinTransactionsEntity.html", transactions=data, length=len(data))
+            return render_template("/entities/dogecoinTransactionsEntity.html", transactions=data, length=len(data))
         else:
             amount = request.form["amount"]
             txDirection = request.form["txDirection"]
@@ -204,9 +204,9 @@ def dogecointransaction():
             mysql.connection.commit()
             return redirect(url_for("dogecointransaction"))
 
-@app.route('/dogecoinTransactionsForm.html')
+@app.route('/forms/dogecoinTransactionsForm.html')
 def dogecointransactionform():
-    return render_template("dogecoinTransactionsForm.html")
+    return render_template("/forms/dogecoinTransactionsForm.html")
 
 @app.route('/index.html')
 def reroute():

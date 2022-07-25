@@ -1,0 +1,101 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+<head>
+    <title>DOGE-X</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/Entity.js')}}" defer></script>
+    
+</head>
+<div class="nav-bar-container">
+    <div class="nav-home-button">
+        <a href="../index.html">DOGE-X</a>
+    </div>
+    <div class="nav-bar">
+        <div class="nav-item">
+            <a href="userAccountsEntity.html">User Accounts</a>
+        </div>
+        <div class="nav-item">
+            <a href="fiatWalletsEntity.html">Fiat Wallets</a>
+        </div>
+        <div class="nav-item">
+            <a href="dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+        </div>
+        <div class="nav-item">
+            <a href="dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+        </div>
+        <div class="nav-item">
+            <a href="exchangeOrdersEntity.html">Exchange Orders</a>
+        </div>
+    </div>
+</div>
+<body>
+    <p hidden id="length"></p>
+    <script type="text/javascript">
+        let length = {{length|tojson}};
+        document.getElementById("length").innerHTML = length;
+    </script>
+    <div class="header-container">
+        <div class="header">
+            <h2>Exchange Orders</h2>
+        </div>
+    </div>
+    <div class="table-nav-bar-container">
+        <div class="search-bar">
+            <div class="search-text-box">
+                <input type="text" placeholder="Search User by Name...">
+            </div>
+            <div class="search-button">
+                <button>Search</button>
+            </div>
+        </div>
+        <div class="crud-buttons">
+            <div class="crud-button">
+                <button onclick="location.href='../forms/exchangeOrdersForm.html'">Create</button>
+            </div>
+            <div class="crud-button">
+                <button onclick="location.href='../forms/exchangeOrdersForm.html'">Update</button>
+            </div>
+            <div class="crud-button">
+                <button onclick="location.href='../forms/exchangeOrdersForm.html'">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>            
+                <tr>
+                    <th>Select</th>
+                    <th>Exchange ID</th>
+                    <th>Fiat Wallet ID</th>
+                    <th>Dogecoin Wallet ID</th>
+                    <th>Order Timestamp</th>
+                    <th>Order Type</th>
+                    <th>Order Direction</th>
+                    <th>Amount Filled</th>
+                    <th>Order Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in exchangeOrders %}
+                <tr>
+                    <td class="checkbox"></td>
+                    {% for key in order.keys() %}
+                    <td>{{order[key]}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<footer>
+    <div class="footer">
+        <p>
+            &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+</html>
