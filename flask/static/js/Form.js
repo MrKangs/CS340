@@ -15,9 +15,7 @@ switch(value){
         document.getElementById("exchangeID").value = data["exchangeID"];
         document.getElementById("exchangeID").readOnly = true;
         document.getElementById("fiatWalletID").value = data["fiatWalletID"];
-        document.getElementById("fiatWalletID").readOnly = true;
         document.getElementById("dogecoinWalletID").value = data["dogecoinWalletID"];
-        document.getElementById("dogecoinWalletID").readOnly = true;
         document.getElementById("orderTimestamp").value = data["orderTimestamp"];
         document.getElementById("orderTimestamp").readOnly = true;
         document.getElementById("amountFilled").value = data["amountFilled"];
@@ -60,8 +58,8 @@ switch(value){
         document.getElementById("title").innerText = "Update User Account Record";
         break;
     case 3:
-        document.getElementById("fiatWalletId").value = data["fiatWalletID"];
-        document.getElementById("fiatWalletId").readOnly = true;
+        document.getElementById("fiatWalletID").value = data["fiatWalletID"];
+        document.getElementById("fiatWalletID").readOnly = true;
         document.getElementById("fiatWalletName").value = data["fiatWalletName"];
         document.getElementById("fiatWalletBalance").value = data["fiatBalance"];
         document.getElementById("title").innerText = "Update Fiat Wallet Record";

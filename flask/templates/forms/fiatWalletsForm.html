@@ -33,9 +33,9 @@
     <body>
         <p hidden id="query">{{fiatwallet|tojson}}</p>
         <h2 id="title">Create Fiat Wallet Record</h2>
-        <form method="post" action="fiatWalletsEntity.html">
-            <label for="fiatWalletId">Fiat Wallet ID:</label>
-            <input type="text" id="fiatWalletId" name="fiatWalletId" placeholder="Fiat Wallet ID">
+        <form method="post" action="../../entities/fiatWalletsEntity.html">
+            <label for="fiatWalletID">Fiat Wallet ID:</label>
+            <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID">
 
             <label for="fiatWalletName">Fiat Wallet Name:</label>
             <input type="text" id="fiatWalletName" name="fiatWalletName" placeholder="Fiat Wallet Name">
@@ -43,7 +43,7 @@
             <label for="fiatWalletBalance">Fiat Wallet Balance:</label>
             <input type="text" id="fiatWalletBalance" name="fiatWalletBalance" placeholder="Fiat Wallet Balance">
 
-            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+            <input type="submit" value="Save & Close">
         </form>
     </body>
     <footer>

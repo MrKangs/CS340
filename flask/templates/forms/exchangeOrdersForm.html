@@ -33,10 +33,10 @@
     <body>
         <p hidden id="query">{{order|tojson}}</p>
         <h2 id="title"> Create Exchange Order Record</h2>
-        <form method="post" action="exchangeOrdersEntity.html">
+        <form method="post" action="../../entities/exchangeOrdersEntity.html">
     
             <label for="exchangeID">Exchange Order ID:</label>
-            <input type="text" id="exchangeID" name="exchangeID" placeholder="Exchange Order ID">
+            <input type="text" id="exchangeID" name="exchangeID" placeholder="Exchange Order ID" readonly>
     
             <label for="fiatWalletID">Fiat Wallet ID:</label>
             <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID">
@@ -45,7 +45,7 @@
             <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
     
             <label for="orderTimestamp">Order Timestamp:</label>
-            <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp">
+            <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
     
             <label for="orderType">Order Type:</label>
             <input type="text" id="orderType" name="orderType" placeholder="Order Type">
@@ -59,7 +59,7 @@
             <label for="orderPrice">Order Price:</label>
             <input type="text" id="orderPrice" name="orderPrice" placeholder="Order Price">
             
-            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+            <input type="submit" value="Save & Close">
         </form>
     </body>
     <footer>

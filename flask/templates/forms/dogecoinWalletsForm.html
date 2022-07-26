@@ -33,7 +33,7 @@
     <body>
         <p hidden id="query">{{dogecoinwallet|tojson}}</p>
         <h2 id="title">Create Dogecoin Wallet Record</h2>
-        <form method="post" action="dogecoinWalletsEntity.html">
+        <form method="post" action="../../entities/dogecoinWalletsEntity.html">
             
             <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
             <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
@@ -44,7 +44,7 @@
             <label for="dogecoinBalance">Dogecoin Balance:</label>
             <input type="text" id="dogecoinBalance" name="dogecoinBalance" placeholder="Dogecoin Balance">
     
-            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+            <input type="submit" value="Save & Close">
         </form>
     </body>
     <footer>
