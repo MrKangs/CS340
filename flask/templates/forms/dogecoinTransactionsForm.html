@@ -33,7 +33,7 @@
     <body>
         <p hidden id="query">{{dogecointransaction|tojson}}</p>
         <h2 id="title">Create Dogecoin Transaction Record</h2>
-        <form method="post" action="dogecoinTransactionsEntity.html">
+        <form method="post" action="../../entities/dogecoinTransactionsEntity.html">
     
             <label for="txID">TX ID:</label>
             <input type="text" id="txID" name="txID" placeholder="TX ID">
@@ -56,7 +56,7 @@
             <label for="txHash">TX Hash:</label>
             <input type="text" id="txHash" name="txHash" placeholder="TX Hash">
             
-            <input type="submit" value="Save & Close" onclick="uploadRecord()">
+            <input type="submit" value="Save & Close">
         </form>
     </body>
     <footer>
