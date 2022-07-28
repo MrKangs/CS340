@@ -34,11 +34,11 @@ SELECT * FROM userAccounts WHERE firstName = 'John' AND lastName = 'Doe';
 -- When the user enters John Doe, it will automatically search for the user with the first name John and the last name Doe.
 
 /* Search/Filter fiatWallets table based on First Name and Last Name */
-SELECT * FROM fiatWallets INNER JOIN userAccounts ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE firstName = 'John' AND lastName = 'Doe';
+SELECT * FROM fiatWallets INNER JOIN userAccounts ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE userAccounts.firstName = 'John' AND userAccounts.lastName = 'Doe';
 -- When the user enters John Doe, it will automatically search for the user's fiatwallet information.
 
 /* Search/Filter dogecoinWallets table based on First Name and Last Name */
-SELECT * FROM dogecoinWallets INNER JOIN userAccounts ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE firstName = 'John' AND lastName = 'Doe';
+SELECT * FROM dogecoinWallets INNER JOIN userAccounts ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE userAccounts.firstName = 'John' AND userAccounts.lastName = 'Doe';
 -- When the user enters John Doe, it will automatically search for the user's dogecoinWallet information.
 
 /* Search/Filter all transactions from dogecoinTransactions table based on userAccount firstName and lastName */

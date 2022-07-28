@@ -40,13 +40,14 @@ function onUpdate(){
         alert("Please select one record for update!");
         return html_location;
     }
-    var html_location = window.location.pathname;
-    var checkbox_value = selectedCheckbox.value;
+    var selectedPK = document.getElementsByClassName("data")[selectedCheckbox.value].cells.item(1).textContent;
+    var html_location = window.location.pathname.split("%")[0];
+    console.log(html_location);
     html_location = html_pairs[html_location];
     const request = new XMLHttpRequest();
-    request.open('POST', `${html_location}/${checkbox_value}`, true);
+    request.open('POST', `${html_location}/${selectedPK}`, true);
     request.send();
-    return `${html_location}/${checkbox_value}`;
+    return `${html_location}/${selectedPK}`;
 }
 
 

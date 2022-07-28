@@ -44,12 +44,14 @@
     </div>
     <div class="table-nav-bar-container">
         <div class="search-bar">
-            <div class="search-text-box">
-                <input type="text" placeholder="Search User by Name...">
-            </div>
-            <div class="search-button">
-                <button>Search</button>
-            </div>
+            <form method="post" action="../entities/userAccountsEntity.html">
+                <div class="search-text-box">
+                    <input type="text" id="search" name="search" placeholder="Search User by Full Name...">
+                </div>
+                <div class="search-button">
+                    <input type="submit" placeholder="Search">
+                </div>
+            </form>
         </div>
         <div class="crud-buttons">
             <div class="crud-button">
@@ -84,7 +86,7 @@
             </thead>
             <tbody>
                 {% for profile in users %}
-                <tr>
+                <tr class="data">
                     <td class="checkbox"></td>
                     {% for key in profile.keys() %}
                     <td>{{profile[key]}}</td>
