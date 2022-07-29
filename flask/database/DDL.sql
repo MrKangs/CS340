@@ -1,9 +1,9 @@
 /*
-Authors:        Mark Jordan
+Authors:        Mark Jordan, Kenneth Kang
 Course:         CS340 - Intro to Databases
 Instructors:    Dr. Michael. Curry, Danielle Safonte
-Project:        Step 3 Final
-Due:            2022-07-21
+Project:        Step 4 DRAFT
+Due:            2022-07-28
 Description:    Data Definition queries for DOGE-X.
 */
 

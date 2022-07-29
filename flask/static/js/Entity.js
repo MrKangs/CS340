@@ -50,6 +50,39 @@ function onUpdate(){
     return `${html_location}/${selectedPK}`;
 }
 
+function onDelete(){
+    var checkbox_list = document.getElementsByClassName("checkbox");
+    var isSelected = false;
+    var selectedCheckbox;
+    var html_location = window.location.pathname;
+
+    for (let i = 0; i < checkbox_list.length; i++){
+        var id_name = "checkbox-"+i;
+        var checkbox = document.getElementById(id_name);
+        if (checkbox.checked && isSelected == true){
+            alert("Please select only one record to delete!");
+            return html_location;
+        }
+        if(checkbox.checked && isSelected == false){
+            isSelected = true;
+            selectedCheckbox = checkbox;
+        }
+    }
+    if(isSelected == false){
+        alert("Please select one record to delete!");
+        return html_location;
+    }
+    
+    var selectedPK = document.getElementsByClassName("data")[selectedCheckbox.value].cells.item(1).textContent;
+    var html_location = window.location.pathname.split("%")[0];
+    console.log(html_location);
+    const request = new XMLHttpRequest();
+    request.open('POST', `${html_location}/${selectedPK}/delete`, true);
+    request.send();
+    window.location.reload();
+    // return `${html_location}`;
+}
+
 
 
 

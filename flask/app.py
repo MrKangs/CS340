@@ -113,6 +113,15 @@ def userformupdatepost(inputdata):
         data = cur.fetchone()
         return render_template("/forms/userAccountsForm.html", user=data)
 
+# Delete user account.
+@app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST"])
+def deleteUserAccount(inputdata):
+    if request.method == "POST":
+        query = f'DELETE FROM userAccounts WHERE userID = "{inputdata}"'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        return redirect(url_for("user"))
 
 
 @app.route('/entities/fiatWalletsEntity.html', methods=["POST", "GET"])
@@ -157,7 +166,6 @@ def fiatwalletformupdatepost(inputdata):
         cur.execute(query)
         data = cur.fetchone()
         return render_template("/forms/fiatWalletsForm.html", fiatwallet=data)
-
 
 
 @app.route('/entities/dogecoinWalletsEntity.html', methods=["POST", "GET"])
