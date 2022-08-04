@@ -51,7 +51,12 @@
             <input type="text" id="orderType" name="orderType" placeholder="Order Type">
     
             <label for="orderDirection">Order Direction:</label>
-            <input type="text" id="orderDirection" name="orderDirection" placeholder="Order Direction">
+            <select id="orderDirection" name="orderDirection">
+                <option value="buy">BUY</option>
+                <option value="sell">SELL</option>
+                <option value="stop-market">STOP MARKET</option>
+                <option value="stop-limit">STOP LIMIT</option>
+            </select>
     
             <label for="amountFilled">Amount Filled:</label>
             <input type="text" id="amountFilled" name="amountFilled" placeholder="Amount Filled">

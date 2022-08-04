@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from flask import request
 import static.py.autogenerator as pk_generator
 import static.py.validator as validator
+import static.py.string_parser as sp
 
 # Configuration
 
@@ -134,6 +135,8 @@ def userformupdatepost(inputdata):
 # Delete user account.
 @app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST"])
 def deleteUserAccount(inputdata):
+    selectedPKs = sp.split_user_account(inputdata)
+
     if request.method == "POST":
         query = f'DELETE FROM userAccounts WHERE userID = "{inputdata}"'
         cur = mysql.connection.cursor()
