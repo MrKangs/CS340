@@ -46,13 +46,16 @@
     
             <label for="txDirection">TX Direction:</label>
             <select id="txDirection" name="txDirection">
-                <option value="deposit">deposit</option>
-                <option value="withdrawal">withdrawal</option>
+                <option value="Deposit">Deposit</option>
+                <option value="Withdrawal">Withdrawal</option>
             </select>
     
             <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
             <select id="dogecoinWalletID" name="dogecoinWalletID">
-                <option value=""></option>
+                <option value="Select">Select</option>
+                {% for query in dogecoinwalletID %}
+                <option value={{query["dogecoinWalletID"]}}>{{query["dogecoinWalletID"]}}</option>
+                {% endfor %}
             </select>
     
             <label for="externalWalletAddress">External Wallet Address:</label>
