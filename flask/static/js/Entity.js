@@ -50,42 +50,60 @@ function onUpdate(){
     return `${html_location}/${selectedPK}`;
 }
 
-function onDelete(){
-    var checkbox_list = document.getElementsByClassName("checkbox");
+function onDelete() {
+    var checkboxes = document.getElementsByClassName("checkbox");
     var isSelected = false;
     var selectedCheckbox;
     var html_location = window.location.pathname;
 
-    for (let i = 0; i < checkbox_list.length; i++){
-        var id_name = "checkbox-"+i;
-        var checkbox = document.getElementById(id_name);
-        if (checkbox.checked && isSelected == true){
-            alert("Please select only one record to delete!");
-            return html_location;
-        }
-        if(checkbox.checked && isSelected == false){
-            isSelected = true;
-            selectedCheckbox = checkbox;
-        }
-    }
-    if(isSelected == false){
+    // for (let i = 0; i < checkboxes.length; i++) {
+    //     var checkboxID = "checkbox-" + i;
+    //     var currCheckbox = document.getElementById(checkboxID);
+    //     // if (currCheckbox.checked && isSelected == true){
+    //     //     alert("Please select only one record to delete!");
+    //     //     return html_location;
+    //     // }
+    //     if (currCheckbox.checked && isSelected == false) {
+    //         isSelected = true;
+    //         selectedCheckbox = checkbox;
+    //     }
+    // }
+
+    // Alert the user if they haven't selected a record to delete.
+    if (isSelected == false) {
         alert("Please select one record to delete!");
         return html_location;
     }
     
-    var selectedPK = document.getElementsByClassName("data")[selectedCheckbox.value].cells.item(1).textContent;
+    let selectedPKs = getSelectedPKs();
+
+    // var selectedPK =
+    // document.getElementsByClassName("data")[selectedCheckbox.value].cells.item(1).textContent;
+    
     var html_location = window.location.pathname.split("%")[0];
     console.log(html_location);
     const request = new XMLHttpRequest();
-    request.open('POST', `${html_location}/${selectedPK}/delete`, true);
+    request.open('POST', `${html_location}/${selectedPKs}/delete`, true);
     request.send();
     window.location.reload();
     // return `${html_location}`;
 }
 
+function getSelectedPKs() {
+    var checkboxes = document.getElementsByClassName("checkbox");
+    var selectedPKs = "";
+    for (let i = 0; i < checkboxes.length; i++) {
+        var checkboxID = "checkbox-" + i;
+        var currCheckbox = document.getElementById(checkboxID);
 
-
-
+        // Add a checked checkbox to the selectedPKs string.
+        if (currCheckbox.checked) {
+            selectedPKs += document.getElementsByClassName("data")[i].cells.item(1).textContent;
+            selectedPKs += ",";
+        }
+    }
+    return selectedPKs;
+}
 
 // Execute the function when the user presses the return button to search for a
 // database record.

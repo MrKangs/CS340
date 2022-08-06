@@ -39,10 +39,14 @@
             <input type="text" id="exchangeID" name="exchangeID" placeholder="Exchange Order ID" readonly>
     
             <label for="fiatWalletID">Fiat Wallet ID:</label>
-            <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID">
+            <select id="fiatWalletID" name="fiatWalletID">
+                <option value=""></option>
+            </select>
     
             <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
-            <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID">
+            <select id="dogecoinWalletID" name="dogecoinWalletID">
+                <option value=""></option>
+            </select>
     
             <label for="orderTimestamp">Order Timestamp:</label>
             <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
@@ -51,7 +55,12 @@
             <input type="text" id="orderType" name="orderType" placeholder="Order Type">
     
             <label for="orderDirection">Order Direction:</label>
-            <input type="text" id="orderDirection" name="orderDirection" placeholder="Order Direction">
+            <select id="orderDirection" name="orderDirection">
+                <option value="buy">BUY</option>
+                <option value="sell">SELL</option>
+                <option value="stop-market">STOP MARKET</option>
+                <option value="stop-limit">STOP LIMIT</option>
+            </select>
     
             <label for="amountFilled">Amount Filled:</label>
             <input type="text" id="amountFilled" name="amountFilled" placeholder="Amount Filled">
