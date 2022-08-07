@@ -52,14 +52,17 @@
             <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
     
             <label for="orderType">Order Type:</label>
-            <input type="text" id="orderType" name="orderType" placeholder="Order Type">
+            <select id="orderType" name="orderType">
+                <option value="market">market</option>
+                <option value="limit">limit</option>
+                <option value="stop-market">stop market</option>
+                <option value="stop-limit">stop limit</option>
+            </select>
     
             <label for="orderDirection">Order Direction:</label>
             <select id="orderDirection" name="orderDirection">
-                <option value="buy">BUY</option>
-                <option value="sell">SELL</option>
-                <option value="stop-market">STOP MARKET</option>
-                <option value="stop-limit">STOP LIMIT</option>
+                <option value="buy">buy</option>
+                <option value="sell">sell</option>
             </select>
     
             <label for="amountFilled">Amount Filled:</label>
