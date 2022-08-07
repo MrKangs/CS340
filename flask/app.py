@@ -124,14 +124,24 @@ def userformupdatepost(inputdata):
 # Delete user account.
 @app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST"])
 def deleteUserAccount(inputdata):
-    selectedPKs = sp.split_user_account(inputdata)
-
     if request.method == "POST":
-        query = f'DELETE FROM userAccounts WHERE userID = "{inputdata}"'
-        cur = mysql.connection.cursor()
-        cur.execute(query)
-        mysql.connection.commit()
-        return redirect(url_for("user"))
+        fiatWalletPKString = sp.replace_char(inputdata, "U", "F")
+        selectedFiatWalletPKs = sp.splitPKString(fiatWalletPKString)
+        dogecoinWalletPKString = sp.replace_char(inputdata, "U", "D")
+        selectedDogecoinWalletPKs = sp.splitPKString(dogecoinWalletPKString)
+        selectedUserPKs = sp.split_user_account(inputdata)
+
+        for pkIndex in range(len(selectedUserPKs)):
+            userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserPKs[pkIndex]}"'
+            fiatWalletQuery = f'DELETE FROM fiatWallets WHERE fiatWalletID = "{selectedFiatWalletPKs[pkIndex]}"'
+            dogecoinWalletQuery = f'DELETE FROM dogecoinWallets WHERE dogecoinWalletID = "{selectedDogecoinWalletPKs[pkIndex]}"'
+            cur = mysql.connection.cursor()
+            cur.execute(userAccountQuery)
+            cur.execute(fiatWalletQuery)
+            cur.execute(dogecoinWalletQuery)
+            mysql.connection.commit()
+    
+    return redirect(url_for("user"))
 
 
 @app.route('/entities/fiatWalletsEntity.html', methods=["POST", "GET"])
