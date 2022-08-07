@@ -18,17 +18,21 @@ def validate_dogecoinwallet_input(dogecoinbalance):
     except ValueError:
         return False
 
-def validate_exchangeorder_input(amountfilled, orderprice):
+def validate_exchangeorder_input(amountfilled, orderprice, fiatwallet, dogecoinwallet):
     try:
         float(amountfilled)
         float(orderprice)
+        if fiatwallet == "Select" or dogecoinwallet == "Select":
+            return False
         return True
     except ValueError:
         return False
 
-def validate_dogecointransaction_input(amount):
+def validate_dogecointransaction_input(amount, dogecoinwallet):
     try:
         float(amount)
+        if dogecoinwallet == "Select":
+            return False
         return True
     except ValueError:
         return False

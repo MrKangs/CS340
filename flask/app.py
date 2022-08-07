@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 import os
 from flask_mysqldb import MySQL
 from flask import request
@@ -9,6 +9,7 @@ import static.py.string_parser as sp
 # Configuration
 
 app = Flask(__name__)
+app.secret_key = os.urandom(12)
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
 app.config['MYSQL_USER'] = 'cs340_kangken'
@@ -35,20 +36,6 @@ transactionHash = {"92b1588447ab7f6857ae63185e2046a5a4aa3db0e79c8988f44a90219119
 def root():
     return render_template("index.html")
 
-@app.route('/error/<where>')
-def error(where):
-    if where == "user":
-        message = "There is an issue with the email input. Please update the email field correctly!"
-    elif where == "fiatWallet":
-        message = "There is an issue with the balance input. Please update the Fiat Wallet Balance correctly!"
-    elif where == "dogecoinwallet":
-        message = "There is an issue with the balance input. Please update the Dogecoin Wallet Balance correctly!"
-    elif where == "exchangeorder":
-        message = "There is an issue with the Order Price and/or Amount Filled input. Please update the Order Price and/or Amount Filled correctly!"
-    elif where == "transaction":
-        message = "There is an issue with the Dogecoin Amount input. Please update the Dogecoin Amount correctly!"
-    return render_template("error.html", message=message)
-
 @app.route('/entities/userAccountsEntity.html', methods=["POST", "GET"])
 def user():
     if request.method == "GET":
@@ -65,7 +52,8 @@ def user():
 
         elif bool(request_values.get("userID")):
             if validator.validate_user_input(request.form["email"]) == False:
-                return redirect(url_for("error", where="user"))
+                flash("There is an issue with the email input. Please update the email field correctly!")
+                return redirect(url_for("user"))
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
             address = request.form["address"]
@@ -83,7 +71,8 @@ def user():
             return redirect(url_for("user"))
         else:
             if validator.validate_user_input(request.form["email"]) == False:
-                return redirect(url_for("error", where="user"))
+                flash("There is an issue with the email input. Please update the email field correctly!")
+                return redirect(url_for("user"))
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
             address = request.form["address"]
@@ -170,7 +159,8 @@ def fiatwallet():
             return redirect(url_for("fiatwalletSearch", data=request.form["search"]))
         else:
             if validator.validate_fiatwallet_input(request.form["fiatWalletBalance"]) == False:
-                return redirect(url_for("error", where="fiatWallet"))
+                flash("There is an issue with the balance input. Please update the Fiat Wallet Balance correctly!")
+                return redirect(url_for("fiatwallet"))
             fiatWalletID = request.form["fiatWalletID"]
             fiatBalance = request.form["fiatWalletBalance"]
             fiatWalletName = request.form["fiatWalletName"]
@@ -216,7 +206,8 @@ def dogecoinwallet():
             return redirect(url_for("dogecoinwalletSearch", data=request.form["search"]))
         else:
             if validator.validate_dogecoinwallet_input(request.form["dogecoinBalance"]) == False:
-                return redirect(url_for("error", where="dogecoinwallet"))
+                flash("There is an issue with the balance input. Please update the Dogecoin Wallet Balance correctly!")
+                return redirect(url_for("dogecoinwallet"))
             dogecoinWalletID = request.form["dogecoinWalletID"]
             walletAddress = request.form["walletAddress"]
             dogecoinBalance = request.form["dogecoinBalance"]
@@ -265,8 +256,9 @@ def exchangeorder():
             return redirect(url_for("exchangeorderSearch", data=request.form["search"]))
 
         elif bool(request_values.get("exchangeID")):
-            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"]) == False:
-                return redirect(url_for("error", where="exchangeorder"))
+            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"]) == False:
+                flash("There is an issue with the Order Price input, Amount Filled input, Dogecoin Wallet ID input, or Fiat Wallet ID input. Please update the form correctly!")
+                return redirect(url_for("exchangeorder"))
             orderType = request.form["orderType"]
             orderDirection = request.form["orderDirection"]
             amountFilled = request.form["amountFilled"]
@@ -281,8 +273,9 @@ def exchangeorder():
             mysql.connection.commit()
             return redirect(url_for("exchangeorder"))
         else:
-            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"]) == False:
-                return redirect(url_for("error", where="exchangeorder"))
+            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"]) == False:
+                flash("There is an issue with the Order Price input, Amount Filled input, Dogecoin Wallet ID input, or Fiat Wallet ID input. Please update the form correctly!")
+                return redirect(url_for("exchangeorder"))
             orderType = request.form["orderType"]
             orderDirection = request.form["orderDirection"]
             amountFilled = request.form["amountFilled"]
@@ -310,7 +303,15 @@ def exchangeorderSearch(data):
 
 @app.route('/forms/exchangeOrdersForm.html')
 def exchangeorderform():
-    return render_template("/forms/exchangeOrdersForm.html", order="nothing")
+    query = f'SELECT dogecoinWalletID FROM dogecoinWallets ORDER BY POSITION(left(dogecoinWalletID, 1) IN "D"), length(dogecoinWalletID), dogecoinWalletID'
+    cur = mysql.connection.cursor()
+    cur.execute(query)
+    pk1 = cur.fetchall()
+    query = f'SELECT fiatWalletID FROM fiatWallets ORDER BY POSITION(left(fiatWalletID, 1) IN "F"), length(fiatWalletID), fiatWalletID'
+    cur = mysql.connection.cursor()
+    cur.execute(query)
+    pk2 = cur.fetchall()
+    return render_template("/forms/exchangeOrdersForm.html", order="nothing", pk1=pk1, pk2=pk2)
 
 @app.route('/forms/exchangeOrdersForm.html/<inputdata>', methods=["POST", "GET"])
 def exchangeorderformupdatepost(inputdata):
@@ -321,7 +322,15 @@ def exchangeorderformupdatepost(inputdata):
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchone()
-        return render_template("/forms/exchangeOrdersForm.html", order=data)
+        query = f'SELECT dogecoinWalletID FROM dogecoinWallets ORDER BY POSITION(left(dogecoinWalletID, 1) IN "D"), length(dogecoinWalletID), dogecoinWalletID'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        pk1 = cur.fetchall()
+        query = f'SELECT fiatWalletID FROM fiatWallets ORDER BY POSITION(left(fiatWalletID, 1) IN "F"), length(fiatWalletID), fiatWalletID'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        pk2 = cur.fetchall()
+        return render_template("/forms/exchangeOrdersForm.html", order=data, pk1=pk1, pk2=pk2)
 
 @app.route('/entities/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
 def dogecointransaction():
@@ -338,8 +347,9 @@ def dogecointransaction():
             return redirect(url_for("dogecointransactionSearch", data=request.form["search"]))
 
         elif bool(request_values.get("txID")):
-            if validator.validate_dogecointransaction_input(request.form["amount"]) == False:
-                return redirect(url_for("error", where="transaction"))
+            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"]) == False:
+                flash("There is an issue with the Dogecoin Amount input or Dogecoin Wallet ID input. Please update the form correctly!")
+                return redirect(url_for("dogecointransaction"))
             amount = request.form["amount"]
             txDirection = request.form["txDirection"]
             dogecoinWalletID = request.form["dogecoinWalletID"]
@@ -354,8 +364,9 @@ def dogecointransaction():
             return redirect(url_for("dogecointransaction"))
 
         else:
-            if validator.validate_dogecointransaction_input(request.form["amount"]) == False:
-                return redirect(url_for("error", where="transaction"))
+            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"]) == False:
+                flash("There is an issue with the Dogecoin Amount input or Dogecoin Wallet ID input. Please update the form correctly!")
+                return redirect(url_for("dogecointransaction"))
             amount = request.form["amount"]
             txDirection = request.form["txDirection"]
             dogecoinWalletID = request.form["dogecoinWalletID"]
@@ -383,7 +394,11 @@ def dogecointransactionSearch(data):
 
 @app.route('/forms/dogecoinTransactionsForm.html')
 def dogecointransactionform():
-    return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction="nothing")
+    query = f'SELECT dogecoinWalletID FROM dogecoinWallets ORDER BY POSITION(left(dogecoinWalletID, 1) IN "D"), length(dogecoinWalletID), dogecoinWalletID'
+    cur = mysql.connection.cursor()
+    cur.execute(query)
+    pk = cur.fetchall()
+    return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction="nothing", dogecoinwalletID=pk)
 
 @app.route('/forms/dogecoinTransactionsForm.html/<inputdata>', methods=["POST", "GET"])
 def dogecointransactionformupdatepost(inputdata):
@@ -394,7 +409,11 @@ def dogecointransactionformupdatepost(inputdata):
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchone()
-        return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction=data)
+        query = f'SELECT dogecoinWalletID FROM dogecoinWallets ORDER BY POSITION(left(dogecoinWalletID, 1) IN "D"), length(dogecoinWalletID), dogecoinWalletID'
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        pk = cur.fetchall()
+        return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction=data, dogecoinwalletID=pk)
 
 @app.route('/index.html')
 def reroute():
@@ -402,7 +421,7 @@ def reroute():
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 36439))
+    port = int(os.environ.get('PORT', 36438))
 
 
     app.run(port=port, debug=True)
