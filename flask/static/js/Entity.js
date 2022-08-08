@@ -87,6 +87,7 @@ function onDelete() {
     request.send();
     window.location.reload();
     // return `${html_location}`;
+    return window.location;
 }
 
 function getSelectedPKs() {

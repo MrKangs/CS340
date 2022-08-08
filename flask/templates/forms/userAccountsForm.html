@@ -35,7 +35,7 @@
         <h2 id="title">Create User Account Record</h2>
         <form method="post" action="../../entities/userAccountsEntity.html"> 
             <label for="userID">User ID:</label>
-            <input type="text" id="userID" name="userID" placeholder="User ID" readonly>
+            <input class="disable-input" type="text" id="userID" name="userID" placeholder="User ID" tabindex="-1" readonly>
     
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" placeholder="First Name">
@@ -59,16 +59,16 @@
             <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
     
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" placeholder="Email">
+            <input type="text" id="email" name="email" placeholder="user@example.com">
     
             <label for="password">Password:</label>
             <input type="text" id="password" name="password" placeholder="Password">
     
             <label for="fiatWalletID">Fiat Wallet ID:</label>
-            <input type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID" readonly>
+            <input class="disable-input" type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID" tabindex="-1" readonly>
     
             <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
-            <input type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID" readonly>
+            <input class="disable-input" type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID" tabindex="-1" readonly>
     
             <input type="submit" value="Save & Close">
         </form>
