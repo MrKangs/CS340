@@ -56,18 +56,18 @@ function onDelete() {
     var selectedCheckbox;
     var html_location = window.location.pathname;
 
-    // for (let i = 0; i < checkboxes.length; i++) {
-    //     var checkboxID = "checkbox-" + i;
-    //     var currCheckbox = document.getElementById(checkboxID);
-    //     // if (currCheckbox.checked && isSelected == true){
-    //     //     alert("Please select only one record to delete!");
-    //     //     return html_location;
-    //     // }
-    //     if (currCheckbox.checked && isSelected == false) {
-    //         isSelected = true;
-    //         selectedCheckbox = checkbox;
-    //     }
-    // }
+    for (let i = 0; i < checkboxes.length; i++) {
+        var checkboxID = "checkbox-" + i;
+        var currCheckbox = document.getElementById(checkboxID);
+        // if (currCheckbox.checked && isSelected == true){
+        //     alert("Please select only one record to delete!");
+        //     return html_location;
+        // }
+        if (currCheckbox.checked && isSelected == false) {
+            isSelected = true;
+            selectedCheckbox = checkbox;
+        }
+    }
 
     // Alert the user if they haven't selected a record to delete.
     if (isSelected == false) {

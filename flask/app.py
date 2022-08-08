@@ -1,5 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from operator import imod
 import os
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask import request
 import static.py.autogenerator as pk_generator
@@ -47,7 +48,7 @@ def user():
 
     if request.method == "POST":
         request_values = request.form
-        if bool(request_values.get("search")):           
+        if bool(request_values.get("search")):
             return redirect(url_for("userSearch", data=request.form["search"]))
 
         elif bool(request_values.get("userID")):
@@ -104,7 +105,7 @@ def userSearch(data):
     cur = mysql.connection.cursor()
     cur.execute(query)
     data = cur.fetchall()
-    return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))           
+    return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))
 
 @app.route('/forms/userAccountsForm.html')
 def userform():
@@ -129,7 +130,7 @@ def deleteUserAccount(inputdata):
         selectedFiatWalletPKs = sp.splitPKString(fiatWalletPKString)
         dogecoinWalletPKString = sp.replace_char(inputdata, "U", "D")
         selectedDogecoinWalletPKs = sp.splitPKString(dogecoinWalletPKString)
-        selectedUserPKs = sp.split_user_account(inputdata)
+        selectedUserPKs = sp.splitPKString(inputdata)
 
         for pkIndex in range(len(selectedUserPKs)):
             userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserPKs[pkIndex]}"'
@@ -140,7 +141,7 @@ def deleteUserAccount(inputdata):
             cur.execute(fiatWalletQuery)
             cur.execute(dogecoinWalletQuery)
             mysql.connection.commit()
-    
+
     return redirect(url_for("user"))
 
 
@@ -178,7 +179,7 @@ def fiatwalletSearch(data):
     cur.execute(query)
     data = cur.fetchall()
     return render_template("/entities/fiatWalletsEntity.html", fiatwallets=data, length=len(data))
-   
+
 @app.route('/forms/fiatWalletsForm.html/<inputdata>', methods=["POST", "GET"])
 def fiatwalletformupdatepost(inputdata):
     if request.method == "POST":
@@ -190,6 +191,28 @@ def fiatwalletformupdatepost(inputdata):
         data = cur.fetchone()
         return render_template("/forms/fiatWalletsForm.html", fiatwallet=data)
 
+# Delete fiat wallet.
+@app.route('/entities/fiatWalletsEntity.html/<inputdata>/delete', methods=["POST"])
+def deleteFiatWallet(inputdata):
+    if request.method == "POST":
+        userAccountPKString = sp.replace_char(inputdata, "F", "U")
+        selectedUserAccountPKs = sp.splitPKString(userAccountPKString)
+        dogecoinWalletPKString = sp.replace_char(inputdata, "F", "D")
+        selectedDogecoinWalletPKs = sp.splitPKString(dogecoinWalletPKString)
+        selectedFiatWalletPKs = sp.splitPKString(inputdata)
+
+        for pkIndex in range(len(selectedFiatWalletPKs)):
+            fiatWalletQuery = f'DELETE FROM fiatWallets WHERE fiatWalletID = "{selectedFiatWalletPKs[pkIndex]}"'
+            userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserAccountPKs[pkIndex]}"'
+            dogecoinWalletQuery = f'DELETE FROM dogecoinWallets WHERE dogecoinWalletID = "{selectedDogecoinWalletPKs[pkIndex]}"'
+            cur = mysql.connection.cursor()
+            cur.execute(userAccountQuery)
+            cur.execute(fiatWalletQuery)
+            cur.execute(dogecoinWalletQuery)
+            mysql.connection.commit()
+
+    return redirect(url_for("fiatwallet"))
+
 
 @app.route('/entities/dogecoinWalletsEntity.html', methods=["POST", "GET"])
 def dogecoinwallet():
@@ -199,7 +222,7 @@ def dogecoinwallet():
         cur.execute(query)
         data = cur.fetchall()
         return render_template("/entities/dogecoinWalletsEntity.html", dogecoinWallets=data, length=len(data))
-    
+
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
@@ -241,6 +264,28 @@ def dogecoinwalletformupdatepost(inputdata):
         data = cur.fetchone()
         return render_template("/forms/dogecoinWalletsForm.html", dogecoinwallet=data)
 
+# Delete dogecoin wallet.
+@app.route('/entities/dogecoinWalletsEntity.html/<inputdata>/delete', methods=["POST"])
+def deleteDogecoinWallet(inputdata):
+    if request.method == "POST":
+        userAccountPKString = sp.replace_char(inputdata, "D", "U")
+        selectedUserAccountPKs = sp.splitPKString(userAccountPKString)
+        fiatWalletPKString = sp.replace_char(inputdata, "D", "F")
+        selectedFiatWalletPKs = sp.splitPKString(fiatWalletPKString)
+        selectedDogecoinWalletPKs = sp.splitPKString(inputdata)
+
+        for pkIndex in range(len(selectedDogecoinWalletPKs)):
+            dogecoinWalletQuery = f'DELETE FROM dogecoinWallets WHERE dogecoinWalletID = "{selectedDogecoinWalletPKs[pkIndex]}"'
+            userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserAccountPKs[pkIndex]}"'
+            fiatWalletQuery = f'DELETE FROM fiatWallets WHERE fiatWalletID = "{selectedFiatWalletPKs[pkIndex]}"'
+            cur = mysql.connection.cursor()
+            cur.execute(dogecoinWalletQuery)
+            cur.execute(userAccountQuery)
+            cur.execute(fiatWalletQuery)
+            mysql.connection.commit()
+
+    return redirect(url_for("fiatwallet"))
+
 @app.route('/entities/exchangeOrdersEntity.html', methods=["POST", "GET"])
 def exchangeorder():
     if request.method == "GET":
@@ -249,10 +294,10 @@ def exchangeorder():
         cur.execute(query)
         data = cur.fetchall()
         return render_template("/entities/exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
-    
+
     if request.method == "POST":
         request_values = request.form
-        if bool(request_values.get("search")):           
+        if bool(request_values.get("search")):
             return redirect(url_for("exchangeorderSearch", data=request.form["search"]))
 
         elif bool(request_values.get("exchangeID")):
@@ -298,7 +343,7 @@ def exchangeorderSearch(data):
     cur = mysql.connection.cursor()
     cur.execute(query)
     data = cur.fetchall()
-    return render_template("/entities/exchangeOrdersEntity.html", exchangeOrders=data, length=len(data)) 
+    return render_template("/entities/exchangeOrdersEntity.html", exchangeOrders=data, length=len(data))
 
 
 @app.route('/forms/exchangeOrdersForm.html')
@@ -331,6 +376,20 @@ def exchangeorderformupdatepost(inputdata):
         cur.execute(query)
         pk2 = cur.fetchall()
         return render_template("/forms/exchangeOrdersForm.html", order=data, pk1=pk1, pk2=pk2)
+    
+# Delete exchange order.
+@app.route('/entities/exchangeOrdersEntity.html/<inputdata>/delete', methods=["POST"])
+def deleteExchangeOrder(inputdata):
+    if request.method == "POST":
+        selectedExchangeOrderPKs = sp.splitPKString(inputdata)
+
+        for primaryKey in selectedExchangeOrderPKs:
+            query = f'DELETE FROM exchangeOrders WHERE exchangeID = "{primaryKey}"'
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            mysql.connection.commit()
+
+    return redirect(url_for("exchangeorder"))
 
 @app.route('/entities/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
 def dogecointransaction():
@@ -340,10 +399,10 @@ def dogecointransaction():
         cur.execute(query)
         data = cur.fetchall()
         return render_template("/entities/dogecoinTransactionsEntity.html",transactions=data, length=len(data))
-    
+
     if request.method == "POST":
         request_values = request.form
-        if bool(request_values.get("search")):           
+        if bool(request_values.get("search")):
             return redirect(url_for("dogecointransactionSearch", data=request.form["search"]))
 
         elif bool(request_values.get("txID")):
@@ -389,7 +448,7 @@ def dogecointransactionSearch(data):
     cur = mysql.connection.cursor()
     cur.execute(query)
     data = cur.fetchall()
-    return render_template("/entities/dogecoinTransactionsEntity.html", transactions=data, length=len(data)) 
+    return render_template("/entities/dogecoinTransactionsEntity.html", transactions=data, length=len(data))
 
 
 @app.route('/forms/dogecoinTransactionsForm.html')
@@ -414,6 +473,20 @@ def dogecointransactionformupdatepost(inputdata):
         cur.execute(query)
         pk = cur.fetchall()
         return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction=data, dogecoinwalletID=pk)
+
+# Delete dogecoin transaction.
+@app.route('/entities/dogecoinTransactionsEntity.html/<inputdata>/delete', methods=["POST"])
+def deleteDogecoinTransaction(inputdata):
+    if request.method == "POST":
+        selectedDogecoinTransactionPKs = sp.splitPKString(inputdata)
+
+        for primaryKey in selectedDogecoinTransactionPKs:
+            query = f'DELETE FROM dogecoinTransactions WHERE txID = "{primaryKey}"'
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            mysql.connection.commit()
+
+    return redirect(url_for("dogecointransaction"))
 
 @app.route('/index.html')
 def reroute():
