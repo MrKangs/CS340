@@ -32,6 +32,8 @@
         <p>
             Home page is currently under construction. Select an item in the
             navigation bar to view the corresponding database entity.
+
+            NOTE: The UI for both the fiatWallet and dogecoinWallet entities do not directly allow you to CREATE a new record. This is because every wallet must have a corresponding user account per our project design. To eliminate the possibility of database integrity errors, we are automatically executing CREATE requests for both a new fiatWallet and dogecoinWallet whenever a new userAccount is created. Similarly, whenever a userAccount, fiatWallet, or dogecoinWallet record is deleted, we are automatically executing DELETE requests for the two other corresponding entity records.
         </p>
     </body>
     <footer>
