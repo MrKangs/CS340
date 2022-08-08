@@ -1,6 +1,6 @@
 def splitPKString(pkString):
     """
-    Split a string of the form "U0U1U2" into a list of elements.
+    Split a string of the form "U0,U1,U2" into a list of elements.
     """
     return pkString.split(",")
 
