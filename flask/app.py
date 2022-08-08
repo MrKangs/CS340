@@ -3,9 +3,11 @@ import os
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask import request
+import time
 import static.py.autogenerator as pk_generator
 import static.py.validator as validator
 import static.py.string_parser as sp
+import static.py.webdriver as wd
 
 # Configuration
 
@@ -123,9 +125,10 @@ def userformupdatepost(inputdata):
         return render_template("/forms/userAccountsForm.html", user=data)
 
 # Delete user account.
-@app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST"])
+@app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteUserAccount(inputdata):
-    if request.method == "POST":
+
+    if request.method == "POST":        
         fiatWalletPKString = sp.replace_char(inputdata, "U", "F")
         selectedFiatWalletPKs = sp.splitPKString(fiatWalletPKString)
         dogecoinWalletPKString = sp.replace_char(inputdata, "U", "D")
@@ -136,13 +139,16 @@ def deleteUserAccount(inputdata):
             userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserPKs[pkIndex]}"'
             fiatWalletQuery = f'DELETE FROM fiatWallets WHERE fiatWalletID = "{selectedFiatWalletPKs[pkIndex]}"'
             dogecoinWalletQuery = f'DELETE FROM dogecoinWallets WHERE dogecoinWalletID = "{selectedDogecoinWalletPKs[pkIndex]}"'
+
             cur = mysql.connection.cursor()
             cur.execute(userAccountQuery)
             cur.execute(fiatWalletQuery)
             cur.execute(dogecoinWalletQuery)
             mysql.connection.commit()
 
-    return redirect(url_for("user"))
+        return redirect(url_for("user"))
+
+
 
 
 @app.route('/entities/fiatWalletsEntity.html', methods=["POST", "GET"])

@@ -250,3 +250,11 @@ footer {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 12pt;
 }
+
+
+/* FORMS */
+.disable-input {
+    pointer-events: none;
+    background-color: lightgrey;
+    color: black;
+}
