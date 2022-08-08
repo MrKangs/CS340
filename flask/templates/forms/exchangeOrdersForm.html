@@ -44,6 +44,7 @@
                 {% for query in pk2 %}
                 <option value={{query["fiatWalletID"]}}>{{query["fiatWalletID"]}}</option>
                 {% endfor %}
+                <option value="NULL">None</option>
             </select>
     
             <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
@@ -52,23 +53,26 @@
                 {% for query in pk1 %}
                 <option value={{query["dogecoinWalletID"]}}>{{query["dogecoinWalletID"]}}</option>
                 {% endfor %}
+                <option value="NULL">None</option>
             </select>
     
             <label for="orderTimestamp">Order Timestamp:</label>
-            <input type="text" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
+            <input type="text" class="disable-input" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
     
             <label for="orderType">Order Type:</label>
             <select id="orderType" name="orderType">
-                <option value="market">market</option>
-                <option value="limit">limit</option>
-                <option value="stop-market">stop market</option>
-                <option value="stop-limit">stop limit</option>
+                <option value="Select">Select</option>
+                <option value="Market">Market</option>
+                <option value="Limit">Limit</option>
+                <option value="Stop-Market">Stop-Market</option>
+                <option value="Stop-Limit">Stop-Limit</option>
             </select>
     
             <label for="orderDirection">Order Direction:</label>
             <select id="orderDirection" name="orderDirection">
-                <option value="buy">buy</option>
-                <option value="sell">sell</option>
+                <option value="Select">Select</option>
+                <option value="Buy">Buy</option>
+                <option value="Sell">Sell</option>
             </select>
     
             <label for="amountFilled">Amount Filled:</label>

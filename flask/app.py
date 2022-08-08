@@ -24,14 +24,14 @@ mysql = MySQL(app)
 
 # Variables
 
-pk_userAccounts = 5
-pk_fiatWallets = 5
-pk_dogecoinWallets = 5
-pk_exchangeOrders = 18
-pk_dogecoinTransactions = 14
-externalWalletID = {"DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy", "DAu9awAQWtbD3KR1bNKjNvtR7NhMvyGc4z", "DTJFYN36jz1qx4wLiqQ5Atj3YuxPty8HyD", "D6wm6g81qAfmZswUaB7HqkGHLWeabnDZwp", "DC74MnmyVKZfZGKFAT7Q89jLKtcWyk5EsU", "DGt8UzqzwGcMeZYS11aSrHunFJVckxFvsG", "DFvmPfgRtjAG8FFv9UuBs4ffjCkE8q9YPn", "DRWjzTVtUERKpmieESBxjwb5wH9BuBB3mA", "DDzejugjtXPUZrUtTAojBPAop4U4fYHfZn"}
-dogecoinWalletAddress = {"D8XskzpskY1fGxBrfWMu65AWF1LSFeAvkF", "DEb5KeZAJKeqQ6ugoCZ6fHrBRHHkEkLdQS", "D9wfpqQU4PCZRmDpAqvH6hmau7dEBBJFTq", "DP9jzRmr54eszobQgFsvu2Qgi55DaJBmmy", "DGJNetovmNoBZiF5YymLfcc4R8LAQeewkz"}
-transactionHash = {"92b1588447ab7f6857ae63185e2046a5a4aa3db0e79c8988f44a90219119245b", "7707ddd1931c7ecd937f7edd717c8c7d1cf78947d880384a5a21576ba5f155d5", "802ccc8407e45018c639b978210b1c7bba874ae701501cffb40b8af4171145f7", "38f9e947d84b45a3ad10d97dd1e2d601113858e4a982f992f35f0336ebc19e4a", "c744430e9cde0d588cfc7ce0ac5b3d58358a5351073df2d1ce3e35c7b66fc5e7", "2ff385f8f65385054668414631e4e596cc3fbbe43e57b158c56f4626b5aef359", "97576dc75a02d1381c056c403b2318346989a48f48fc7431bba4f6c300abe6bd", "ca29be2a6d1d5b57afef7daefec09a2e731faaee38e5e6a0ee2bd17aa389491f", "82b1588447ab7f6857ae63185d2046a5a4aa3db0d79c8988f44c90219119245b", "50d94ee75ee361ed84e7897a951204872fefb7c8049adc783e6877362e803e4a", "04184882ecd8db602829f04cc9453f18d822e4ef1e15032755840f007311af79", "cd8435768a7aca7537d28109889a311d1a6b647c00e0aa146887e42e1b8cb057", "1e2e6b087ac2b8f025e730d340be4dfaa7c29080a82c181c4d551919a517b506", "0bd1489941f263d0076efe3b4e980299d67ac918cba49c6b3245d5980175eeec"}
+pk_userAccounts = 0
+pk_fiatWallets = 0
+pk_dogecoinWallets = 0
+pk_exchangeOrders = 0
+pk_dogecoinTransactions = 0
+externalWalletID = set()
+dogecoinWalletAddress = set()
+transactionHash = set()
 
 # Routes
 
@@ -128,6 +128,10 @@ def updateUserAccount(inputdata):
 @app.route('/entities/userAccountsEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteUserAccount(inputdata):
 
+    if request.method == "GET":
+        time.sleep(2)
+        return redirect(url_for("user"), code=200)
+
     if request.method == "POST":        
         fiatWalletPKString = sp.replace_char(inputdata, "U", "F")
         selectedFiatWalletPKs = sp.splitPKString(fiatWalletPKString)
@@ -139,14 +143,13 @@ def deleteUserAccount(inputdata):
             userAccountQuery = f'DELETE FROM userAccounts WHERE userID = "{selectedUserPKs[pkIndex]}"'
             fiatWalletQuery = f'DELETE FROM fiatWallets WHERE fiatWalletID = "{selectedFiatWalletPKs[pkIndex]}"'
             dogecoinWalletQuery = f'DELETE FROM dogecoinWallets WHERE dogecoinWalletID = "{selectedDogecoinWalletPKs[pkIndex]}"'
-
             cur = mysql.connection.cursor()
             cur.execute(userAccountQuery)
             cur.execute(fiatWalletQuery)
             cur.execute(dogecoinWalletQuery)
             mysql.connection.commit()
 
-        return redirect(url_for("user"))
+        return redirect(url_for("deleteUserAccount", inputdata="none"))
 
 
 
@@ -198,8 +201,12 @@ def updateFiatWallet(inputdata):
         return render_template("/forms/fiatWalletsForm.html", fiatwallet=data)
 
 # Delete fiat wallet.
-@app.route('/entities/fiatWalletsEntity.html/<inputdata>/delete', methods=["POST"])
+@app.route('/entities/fiatWalletsEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteFiatWallet(inputdata):
+
+    if request.method == "GET":
+        return redirect(url_for("fiatwallet"))
+
     if request.method == "POST":
         userAccountPKString = sp.replace_char(inputdata, "F", "U")
         selectedUserAccountPKs = sp.splitPKString(userAccountPKString)
@@ -217,7 +224,7 @@ def deleteFiatWallet(inputdata):
             cur.execute(dogecoinWalletQuery)
             mysql.connection.commit()
 
-    return redirect(url_for("fiatwallet"))
+    return redirect(url_for("deleteFiatWallet", inputdata="none"))
 
 
 @app.route('/entities/dogecoinWalletsEntity.html', methods=["POST", "GET"])
@@ -271,8 +278,12 @@ def updateDogecoinWallet(inputdata):
         return render_template("/forms/dogecoinWalletsForm.html", dogecoinwallet=data)
 
 # Delete dogecoin wallet.
-@app.route('/entities/dogecoinWalletsEntity.html/<inputdata>/delete', methods=["POST"])
+@app.route('/entities/dogecoinWalletsEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteDogecoinWallet(inputdata):
+
+    if request.method == "GET":
+        return redirect(url_for("fiatwallet"), code=200)
+
     if request.method == "POST":
         userAccountPKString = sp.replace_char(inputdata, "D", "U")
         selectedUserAccountPKs = sp.splitPKString(userAccountPKString)
@@ -290,7 +301,7 @@ def deleteDogecoinWallet(inputdata):
             cur.execute(fiatWalletQuery)
             mysql.connection.commit()
 
-    return redirect(url_for("fiatwallet"))
+        return redirect(url_for("deleteDogecoinWallet", inputdata="none"))
 
 @app.route('/entities/exchangeOrdersEntity.html', methods=["POST", "GET"])
 def exchangeorder():
@@ -307,7 +318,7 @@ def exchangeorder():
             return redirect(url_for("searchForExchangeOrder", data=request.form["search"]))
 
         elif bool(request_values.get("exchangeID")):
-            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"]) == False:
+            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"], request.form['orderType'], request.form["orderDirection"]) == False:
                 flash("There is an issue with the Order Price input, Amount Filled input, Dogecoin Wallet ID input, or Fiat Wallet ID input. Please update the form correctly!")
                 return redirect(url_for("exchangeorder"))
             orderType = request.form["orderType"]
@@ -324,7 +335,7 @@ def exchangeorder():
             mysql.connection.commit()
             return redirect(url_for("exchangeorder"))
         else:
-            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"]) == False:
+            if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"], request.form['orderType'], request.form["orderDirection"]) == False:
                 flash("There is an issue with the Order Price input, Amount Filled input, Dogecoin Wallet ID input, or Fiat Wallet ID input. Please update the form correctly!")
                 return redirect(url_for("exchangeorder"))
             orderType = request.form["orderType"]
@@ -384,8 +395,12 @@ def updateExchangeOrder(inputdata):
         return render_template("/forms/exchangeOrdersForm.html", order=data, pk1=pk1, pk2=pk2)
     
 # Delete exchange order.
-@app.route('/entities/exchangeOrdersEntity.html/<inputdata>/delete', methods=["POST"])
+@app.route('/entities/exchangeOrdersEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteExchangeOrder(inputdata):
+    
+    if request.method == "GET":
+        return redirect(url_for("exchangeorder"), code=200)
+
     if request.method == "POST":
         selectedExchangeOrderPKs = sp.splitPKString(inputdata)
 
@@ -395,7 +410,7 @@ def deleteExchangeOrder(inputdata):
             cur.execute(query)
             mysql.connection.commit()
 
-    return redirect(url_for("exchangeorder"))
+        return redirect(url_for("deleteExchangeOrder", inputdata="none"))
 
 @app.route('/entities/dogecoinTransactionsEntity.html', methods=["POST", "GET"])
 def dogecointransaction():
@@ -412,7 +427,7 @@ def dogecointransaction():
             return redirect(url_for("searchForDogecoinTransaction", data=request.form["search"]))
 
         elif bool(request_values.get("txID")):
-            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"]) == False:
+            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"], request.form["txDirection"]) == False:
                 flash("There is an issue with the Dogecoin Amount input or Dogecoin Wallet ID input. Please update the form correctly!")
                 return redirect(url_for("dogecointransaction"))
             amount = request.form["amount"]
@@ -429,7 +444,7 @@ def dogecointransaction():
             return redirect(url_for("dogecointransaction"))
 
         else:
-            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"]) == False:
+            if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"], request.form["txDirection"]) == False:
                 flash("There is an issue with the Dogecoin Amount input or Dogecoin Wallet ID input. Please update the form correctly!")
                 return redirect(url_for("dogecointransaction"))
             amount = request.form["amount"]
@@ -481,8 +496,12 @@ def updateDogecoinTransaction(inputdata):
         return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction=data, dogecoinwalletID=pk)
 
 # Delete dogecoin transaction.
-@app.route('/entities/dogecoinTransactionsEntity.html/<inputdata>/delete', methods=["POST"])
+@app.route('/entities/dogecoinTransactionsEntity.html/<inputdata>/delete', methods=["POST", "GET"])
 def deleteDogecoinTransaction(inputdata):
+    
+    if request.method == "GET":
+        return redirect(url_for("dogecointransaction"), code=200)
+    
     if request.method == "POST":
         selectedDogecoinTransactionPKs = sp.splitPKString(inputdata)
 
@@ -492,7 +511,7 @@ def deleteDogecoinTransaction(inputdata):
             cur.execute(query)
             mysql.connection.commit()
 
-    return redirect(url_for("dogecointransaction"))
+    return redirect(url_for("deleteDogecoinTransaction", inputdata="none"))
 
 @app.route('/index.html')
 def reroute():
@@ -500,7 +519,7 @@ def reroute():
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 36438))
+    port = int(os.environ.get('PORT', 36439))
 
 
     app.run(port=port, debug=True)
