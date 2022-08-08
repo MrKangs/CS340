@@ -51,7 +51,7 @@ def user():
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
-            return redirect(url_for("userSearch", data=request.form["search"]))
+            return redirect(url_for("searchForUserAccount", data=request.form["search"]))
 
         elif bool(request_values.get("userID")):
             if validator.validate_user_input(request.form["email"]) == False:
@@ -101,7 +101,7 @@ def user():
             return redirect(url_for("user"))
 
 @app.get('/entities/userAccountsEntity.html?data=<data>')
-def userSearch(data):
+def searchForUserAccount(data):
     firstName, lastName = data.split()
     query = f'SELECT * FROM userAccounts WHERE firstName = "{firstName}" AND lastName = "{lastName}" ORDER BY POSITION(left(userID, 1) IN "U"), length(userID), userID'
     cur = mysql.connection.cursor()
@@ -110,13 +110,13 @@ def userSearch(data):
     return render_template("/entities/userAccountsEntity.html", users=data, length=len(data))
 
 @app.route('/forms/userAccountsForm.html')
-def userform():
+def renderUserAccountsForm():
     return render_template("/forms/userAccountsForm.html", user="nothing")
 
 @app.route('/forms/userAccountsForm.html/<inputdata>', methods=["POST", "GET"])
-def userformupdatepost(inputdata):
+def updateUserAccount(inputdata):
     if request.method == "POST":
-        return redirect(url_for("userformupdatepost", inputdata=inputdata))
+        return redirect(url_for("updateUserAccount", inputdata=inputdata))
     if request.method == "GET":
         query = f'SELECT * FROM userAccounts WHERE userID = "{inputdata}"'
         cur = mysql.connection.cursor()
@@ -163,7 +163,7 @@ def fiatwallet():
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
-            return redirect(url_for("fiatwalletSearch", data=request.form["search"]))
+            return redirect(url_for("searchFiatWallet", data=request.form["search"]))
         else:
             if validator.validate_fiatwallet_input(request.form["fiatWalletBalance"]) == False:
                 flash("There is an issue with the balance input. Please update the Fiat Wallet Balance correctly!")
@@ -178,7 +178,7 @@ def fiatwallet():
             return redirect(url_for("fiatwallet"))
 
 @app.get('/entities/fiatWalletsEntity.html?data=<data>')
-def fiatwalletSearch(data):
+def searchFiatWallet(data):
     firstName, lastName = data.split()
     query = f'SELECT fiatWallets.fiatWalletID, fiatWallets.fiatWalletName,fiatWallets.fiatBalance FROM fiatWallets INNER JOIN userAccounts ON fiatWallets.fiatWalletID = userAccounts.fiatWalletID WHERE userAccounts.firstName = "{firstName}" AND userAccounts.lastName = "{lastName}" ORDER BY POSITION(left(fiatWallets.fiatWalletID, 1) IN "F"), length(fiatWallets.fiatWalletID), fiatWallets.fiatWalletID'
     cur = mysql.connection.cursor()
@@ -187,9 +187,9 @@ def fiatwalletSearch(data):
     return render_template("/entities/fiatWalletsEntity.html", fiatwallets=data, length=len(data))
 
 @app.route('/forms/fiatWalletsForm.html/<inputdata>', methods=["POST", "GET"])
-def fiatwalletformupdatepost(inputdata):
+def updateFiatWallet(inputdata):
     if request.method == "POST":
-        return redirect(url_for("fiatwalletformupdatepost",inputdata=inputdata))
+        return redirect(url_for("updateFiatWallet",inputdata=inputdata))
     if request.method == "GET":
         query = f'SELECT * FROM fiatWallets WHERE fiatWalletID = "{inputdata}"'
         cur = mysql.connection.cursor()
@@ -232,7 +232,7 @@ def dogecoinwallet():
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
-            return redirect(url_for("dogecoinwalletSearch", data=request.form["search"]))
+            return redirect(url_for("searchForDogecoinWallet", data=request.form["search"]))
         else:
             if validator.validate_dogecoinwallet_input(request.form["dogecoinBalance"]) == False:
                 flash("There is an issue with the balance input. Please update the Dogecoin Wallet Balance correctly!")
@@ -247,7 +247,7 @@ def dogecoinwallet():
             return redirect(url_for("dogecoinwallet"))
 
 @app.get('/entities/dogecoinWalletsEntity.html?data=<data>')
-def dogecoinwalletSearch(data):
+def searchForDogecoinWallet(data):
     firstName, lastName = data.split()
     query = f'SELECT dogecoinWallets.dogecoinWalletID, dogecoinWallets.walletAddress, dogecoinWallets.dogecoinBalance FROM dogecoinWallets INNER JOIN userAccounts ON dogecoinWallets.dogecoinWalletID = userAccounts.dogecoinWalletID WHERE userAccounts.firstName = "{firstName}" AND userAccounts.lastName = "{lastName}" ORDER BY POSITION(left(dogecoinWallets.dogecoinWalletID, 1) IN "D"), length(dogecoinWallets.dogecoinWalletID), dogecoinWallets.dogecoinWalletID'
     cur = mysql.connection.cursor()
@@ -260,9 +260,9 @@ def dogecoinwalletform():
     return render_template("/forms/dogecoinWalletsForm.html")
 
 @app.route('/forms/dogecoinWalletsForm.html/<inputdata>', methods=["POST", "GET"])
-def dogecoinwalletformupdatepost(inputdata):
+def updateDogecoinWallet(inputdata):
     if request.method == "POST":
-        return redirect(url_for("dogecoinwalletformupdatepost",inputdata=inputdata))
+        return redirect(url_for("updateDogecoinWallet",inputdata=inputdata))
     if request.method == "GET":
         query = f'SELECT * FROM dogecoinWallets WHERE dogecoinWalletID = "{inputdata}"'
         cur = mysql.connection.cursor()
@@ -304,7 +304,7 @@ def exchangeorder():
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
-            return redirect(url_for("exchangeorderSearch", data=request.form["search"]))
+            return redirect(url_for("searchForExchangeOrder", data=request.form["search"]))
 
         elif bool(request_values.get("exchangeID")):
             if validator.validate_exchangeorder_input(request.form["amountFilled"], request.form["orderPrice"], request.form["fiatWalletID"], request.form["dogecoinWalletID"]) == False:
@@ -343,7 +343,7 @@ def exchangeorder():
             return redirect(url_for("exchangeorder"))
 
 @app.get('/entities/exchangeOrdersEntity.html?data=<data>')
-def exchangeorderSearch(data):
+def searchForExchangeOrder(data):
     firstName, lastName = data.split()
     query = f'SELECT exchangeOrders.exchangeID, exchangeOrders.fiatWalletID, exchangeOrders.dogecoinWalletID, exchangeOrders.orderTimestamp, exchangeOrders.orderType, exchangeOrders.orderDirection, exchangeOrders.amountFilled, exchangeOrders.orderPrice FROM exchangeOrders INNER JOIN dogecoinWallets ON dogecoinWallets.dogecoinWalletID = exchangeOrders.dogecoinWalletID INNER JOIN userAccounts ON userAccounts.dogecoinWalletID = dogecoinWallets.dogecoinWalletID WHERE userAccounts.firstName = "{firstName}" AND userAccounts.lastName = "{lastName}" ORDER BY POSITION(left(exchangeOrders.exchangeID, 1) IN "E"), length(exchangeOrders.exchangeID), exchangeOrders.exchangeID'
     cur = mysql.connection.cursor()
@@ -365,9 +365,9 @@ def exchangeorderform():
     return render_template("/forms/exchangeOrdersForm.html", order="nothing", pk1=pk1, pk2=pk2)
 
 @app.route('/forms/exchangeOrdersForm.html/<inputdata>', methods=["POST", "GET"])
-def exchangeorderformupdatepost(inputdata):
+def updateExchangeOrder(inputdata):
     if request.method == "POST":
-        return redirect(url_for("exchangeorderformupdatepost",inputdata=inputdata))
+        return redirect(url_for("updateExchangeOrder",inputdata=inputdata))
     if request.method == "GET":
         query = f'SELECT * FROM exchangeOrders WHERE exchangeID = "{inputdata}"'
         cur = mysql.connection.cursor()
@@ -409,7 +409,7 @@ def dogecointransaction():
     if request.method == "POST":
         request_values = request.form
         if bool(request_values.get("search")):
-            return redirect(url_for("dogecointransactionSearch", data=request.form["search"]))
+            return redirect(url_for("searchForDogecoinTransaction", data=request.form["search"]))
 
         elif bool(request_values.get("txID")):
             if validator.validate_dogecointransaction_input(request.form["amount"], request.form["dogecoinWalletID"]) == False:
@@ -448,7 +448,7 @@ def dogecointransaction():
 
 
 @app.get('/entities/dogecoinTransactionsEntity.html?data=<data>')
-def dogecointransactionSearch(data):
+def searchForDogecoinTransaction(data):
     firstName, lastName = data.split()
     query = f'SELECT dogecoinTransactions.txID, dogecoinTransactions.txTimestamp, dogecoinTransactions.amount, dogecoinTransactions.txDirection, dogecoinTransactions.dogecoinWalletID, dogecoinTransactions.externalWalletAddress, dogecoinTransactions.txHash FROM dogecoinTransactions INNER JOIN dogecoinWallets ON dogecoinWallets.dogecoinWalletID = dogecoinTransactions.dogecoinWalletID INNER JOIN userAccounts ON userAccounts.dogecoinWalletID = dogecoinWallets.dogecoinWalletID WHERE userAccounts.firstName  ="{firstName}" AND userAccounts.lastName = "{lastName}" ORDER BY POSITION(left(dogecoinTransactions.txID, 1) IN "T"), length(dogecoinTransactions.txID), dogecoinTransactions.txID'
     cur = mysql.connection.cursor()
@@ -466,9 +466,9 @@ def dogecointransactionform():
     return render_template("/forms/dogecoinTransactionsForm.html", dogecointransaction="nothing", dogecoinwalletID=pk)
 
 @app.route('/forms/dogecoinTransactionsForm.html/<inputdata>', methods=["POST", "GET"])
-def dogecointransactionformupdatepost(inputdata):
+def updateDogecoinTransaction(inputdata):
     if request.method == "POST":
-        return redirect(url_for("dogecointransactionformupdatepost",inputdata=inputdata))
+        return redirect(url_for("updateDogecoinTransaction",inputdata=inputdata))
     if request.method == "GET":
         query = f'SELECT * FROM dogecoinTransactions WHERE txID = "{inputdata}"'
         cur = mysql.connection.cursor()
