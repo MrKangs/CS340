@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="./entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="./entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p>
+            Welcome to the DOGE-X platform database GUI.<br><br>
+            
+            Select an item in the navigation bar to view the corresponding database entity.<br><br>
+
+            <u><b>NOTE:</b></u> The UI for both the fiatWallet and dogecoinWallet entities <b>DO NOT</b> directly allow you to <b>CREATE</b> a new record. This is because every wallet must have a corresponding user account per our project design. To eliminate the possibility of database integrity errors, we are automatically executing <b>CREATE</b> requests for both a new fiatWallet and dogecoinWallet whenever a new userAccount is created. Similarly, whenever a userAccount, fiatWallet, or dogecoinWallet record is deleted, we are automatically executing <b>DELETE</b> requests for the two other corresponding entity records. Also, pressing each entity's DELETE button successfully queries the MySQL database and delete's the corresponding record. However, you need to refresh/reload the browser in order to see the change reflected in the table. Unfortunately, we were not able to figure out how to reload the page automatically. It appears that the GET request to reload the table sometimes occurs before the POST request to delete the record, so the table doesn't always automatically update; in these instances, manually reloading the page is necessary to view the change to the database.
+        </p>
+    </body>
+    <footer>
+        <div class="footer-text">
+            <p>
+                &copy; Copyright 2022 | Group 50 - Mark Jordan and Kenneth Kang
+                | All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>

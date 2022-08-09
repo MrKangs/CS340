@@ -1,0 +1,57 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/Form.js')}}" defer></script>
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../../../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p hidden id="query">{{dogecoinwallet|tojson}}</p>
+        <h2 id="title">Create Dogecoin Wallet Record</h2>
+        <form method="post" action="../../entities/dogecoinWalletsEntity.html">
+            
+            <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
+            <input class="disable-input" type="text" id="dogecoinWalletID" name="dogecoinWalletID" placeholder="Dogecoin Wallet ID" tabindex="-1">
+    
+            <label for="walletAddress">Wallet Address:</label>
+            <input type="text" id="walletAddress" name="walletAddress" placeholder="Wallet Address">
+    
+            <label for="dogecoinBalance">Dogecoin Balance:</label>
+            <input type="text" id="dogecoinBalance" name="dogecoinBalance" placeholder="Dogecoin Balance">
+    
+            <input type="submit" value="Save & Close">
+        </form>
+    </body>
+    <footer>
+        <div class="footer">
+            <p>
+                &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>

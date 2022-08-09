@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/Form.js')}}" defer></script>
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../../../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p hidden id="query">{{fiatwallet|tojson}}</p>
+        <h2 id="title">Create Fiat Wallet Record</h2>
+        <form method="post" action="../../entities/fiatWalletsEntity.html">
+            <label for="fiatWalletID">Fiat Wallet ID:</label>
+            <input class="disable-input" type="text" id="fiatWalletID" name="fiatWalletID" placeholder="Fiat Wallet ID" tabindex="-1">
+
+            <label for="fiatWalletName">Fiat Wallet Name:</label>
+            <input type="text" id="fiatWalletName" name="fiatWalletName" placeholder="Fiat Wallet Name">
+
+            <label for="fiatWalletBalance">Fiat Wallet Balance:</label>
+            <input type="text" id="fiatWalletBalance" name="fiatWalletBalance" placeholder="Fiat Wallet Balance">
+
+            <input type="submit" value="Save & Close">
+        </form>
+    </body>
+    <footer>
+        <div class="footer">
+            <p>
+                &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>

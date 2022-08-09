@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+
+<html lang="en">
+    <head>
+        <title>DOGE-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/Form.js')}}" defer></script>
+    </head>
+    <div class="nav-bar-container">
+        <div class="nav-home-button">
+            <a href="../../../index.html">DOGE-X</a>
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item">
+                <a href="../../entities/userAccountsEntity.html">User Accounts</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/fiatWalletsEntity.html">Fiat Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinWalletsEntity.html">Dogecoin Wallets</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/dogecoinTransactionsEntity.html">Dogecoin Transactions</a>
+            </div>
+            <div class="nav-item">
+                <a href="../../entities/exchangeOrdersEntity.html">Exchange Orders</a>
+            </div>
+        </div>
+    </div>
+    <body>
+        <p hidden id="query">{{order|tojson}}</p>
+        <h2 id="title"> Create Exchange Order Record</h2>
+        <form method="post" action="../../entities/exchangeOrdersEntity.html">
+    
+            <label for="exchangeID">Exchange Order ID:</label>
+            <input class="disable-input" type="text" id="exchangeID" name="exchangeID" placeholder="Exchange Order ID" tabindex="-1" readonly>
+    
+            <label for="fiatWalletID">Fiat Wallet ID:</label>
+            <select id="fiatWalletID" name="fiatWalletID">
+                <option value="Select">Select</option>
+                {% for query in pk2 %}
+                <option value={{query["fiatWalletID"]}}>{{query["fiatWalletID"]}}</option>
+                {% endfor %}
+                <option value="NULL">None</option>
+            </select>
+    
+            <label for="dogecoinWalletID">Dogecoin Wallet ID:</label>
+            <select id="dogecoinWalletID" name="dogecoinWalletID">
+                <option value="Select">Select</option>
+                {% for query in pk1 %}
+                <option value={{query["dogecoinWalletID"]}}>{{query["dogecoinWalletID"]}}</option>
+                {% endfor %}
+                <option value="NULL">None</option>
+            </select>
+    
+            <label for="orderTimestamp">Order Timestamp:</label>
+            <input type="text" class="disable-input" id="orderTimestamp" name="orderTimestamp" placeholder="Order Timestamp" readonly>
+    
+            <label for="orderType">Order Type:</label>
+            <select id="orderType" name="orderType">
+                <option value="Select">Select</option>
+                <option value="Market">Market</option>
+                <option value="Limit">Limit</option>
+                <option value="Stop-Market">Stop-Market</option>
+                <option value="Stop-Limit">Stop-Limit</option>
+            </select>
+    
+            <label for="orderDirection">Order Direction:</label>
+            <select id="orderDirection" name="orderDirection">
+                <option value="Select">Select</option>
+                <option value="Buy">Buy</option>
+                <option value="Sell">Sell</option>
+            </select>
+    
+            <label for="amountFilled">Amount Filled:</label>
+            <input type="text" id="amountFilled" name="amountFilled" placeholder="Amount Filled">
+    
+            <label for="orderPrice">Order Price:</label>
+            <input type="text" id="orderPrice" name="orderPrice" placeholder="Order Price">
+            
+            <input type="submit" value="Save & Close">
+        </form>
+    </body>
+    <footer>
+        <div class="footer">
+            <p>
+                &copy; Copyright 2022 Mark Jordan and Kenneth Kang. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</html>
