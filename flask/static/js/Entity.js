@@ -93,7 +93,7 @@ function onDelete() {
     const request = new XMLHttpRequest();
     request.open('POST', `${html_location}/${selectedPKs}/delete`, true);
     request.send();
-    sleep(checkboxes.length);
+    sleep(checkboxes.length*10);
     return window.location
 
 }
