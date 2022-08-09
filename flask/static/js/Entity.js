@@ -18,6 +18,14 @@ const html_pairs = {
 
 }
 
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
+
 function onUpdate(){
     var checkbox_list = document.getElementsByClassName("checkbox");
     var isSelected = false;
@@ -85,9 +93,9 @@ function onDelete() {
     const request = new XMLHttpRequest();
     request.open('POST', `${html_location}/${selectedPKs}/delete`, true);
     request.send();
-    window.location.reload();
-    // return `${html_location}`;
-    return window.location;
+    sleep(checkboxes.length);
+    return window.location
+
 }
 
 function getSelectedPKs() {
