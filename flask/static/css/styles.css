@@ -90,6 +90,10 @@ h2 {
 .search-bar {
     display: flex;
     margin-left: 20rem;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
 }
 
 .search-text-box {
@@ -104,7 +108,7 @@ h2 {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
-    width: 300px;
+    width: 400px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 12pt;
     color: black;
@@ -117,6 +121,7 @@ h2 {
 .search-button {
     display: flex;
     margin-right: 1rem;
+    flex-direction: row;
 }
 
 .search-button input {
